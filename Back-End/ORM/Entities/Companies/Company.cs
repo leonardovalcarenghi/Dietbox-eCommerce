@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Dietbox.ECommerce.ORM.Entities.Companies
 {
+
+    [Table("Companies", Schema = "dbo")]
     public class Company : IIdentity, ICreatedDate
     {
 
@@ -50,7 +52,7 @@ namespace Dietbox.ECommerce.ORM.Entities.Companies
         /// </summary>
         [Required]
         [Column("Password")]
-        [MaxLength(50)]
+        [MaxLength(64)]
         public string Password { get; set; }
 
         /// <summary>

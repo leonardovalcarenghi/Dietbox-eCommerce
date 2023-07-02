@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace Dietbox.ECommerce.ORM.Entities.Users
 {
-    public class User : IIdentity, ICreatedDate
+
+    [Table("Customers", Schema = "dbo")]
+    public class Customer : IIdentity, ICreatedDate
     {
         /// <summary>
-        /// Identificador do usuário.
+        /// Identificador do cliente.
         /// </summary>
         [Key]
         [Required]
@@ -20,15 +22,31 @@ namespace Dietbox.ECommerce.ORM.Entities.Users
         public int ID { get; set; }
 
         /// <summary>
-        /// Nome do usuário.
+        /// Nome completo do cliente.
         /// </summary>
         [Required]
         [Column("Name")]
-        [MaxLength(100)]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         /// <summary>
-        /// E-mail do usuário.
+        /// Data de nascimento do cliente.
+        /// </summary>
+        [Required]
+        [Column("Birthdate")]
+        public DateTime Birthdate { get; set; }
+
+        /// <summary>
+        /// CPF do cliente.
+        /// </summary>
+        [Required]
+        [Column("CPF")]
+        [MaxLength(14)]
+        public string CPF { get; set; }
+
+
+        /// <summary>
+        /// E-mail do cliente.
         /// </summary>
         [Required]
         [Column("Email")]
@@ -36,13 +54,19 @@ namespace Dietbox.ECommerce.ORM.Entities.Users
         public string Email { get; set; }
 
         /// <summary>
-        /// Senha de acesso do usuário.
+        /// Senha de acesso do cliente.
         /// </summary>
         [Required]
         [Column("Password")]
         [MaxLength(50)]
         public string Password { get; set; }
 
+        /// <summary>
+        /// Flag indicando se cliente está com cadastro ativo.
+        /// </summary>
+        [Required]
+        [Column("Active")]
+        public bool Active { get; set; }
 
         /// <summary>
         /// Data/Hora de cadastro do usuário no sistema.
