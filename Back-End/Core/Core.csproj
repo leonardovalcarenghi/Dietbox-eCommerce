@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Dietbox.ECommerce.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\Companies\" />
+    <Folder Include="DTO\Products\" />
+    <Folder Include="DTO\Users\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Handlers\Companies\" />
+    <Folder Include="Handlers\Users\" />
+    <Folder Include="Interfaces\Companies\" />
+    <Folder Include="Interfaces\Users\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
