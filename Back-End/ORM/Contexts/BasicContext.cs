@@ -1,4 +1,4 @@
-﻿using Dietbox.ECommerce.ORM.Entities.Products;
+﻿using Dietbox.ECommerce.ORM.Entities.Companies;
 using Dietbox.ECommerce.ORM.Entities.Users;
 using Dietbox.ECommerce.ORM.Interfaces;
 using Microsoft.EntityFrameworkCore;

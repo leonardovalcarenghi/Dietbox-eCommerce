@@ -136,6 +136,8 @@ namespace Dietbox.ECommerce.Core.Validations.Companies
 
             #endregion
 
+
+
             // Retornar caso houver problemas na validação dos campos do comando:
             if (_messages.Any()) return (false, _messages);
 

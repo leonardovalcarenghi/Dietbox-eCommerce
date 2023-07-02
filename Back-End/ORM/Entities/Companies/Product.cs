@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dietbox.ECommerce.ORM.Entities.Products
+namespace Dietbox.ECommerce.ORM.Entities.Companies
 {
+
+    [Table("Products", Schema = "company")]
     public class Product : IIdentity, ICreatedDate
     {
         /// <summary>
@@ -42,26 +44,32 @@ namespace Dietbox.ECommerce.ORM.Entities.Products
         public string? Description { get; set; }
 
         /// <summary>
-        /// Código de barras do produto.
-        /// </summary>
-        [Required]
-        [Column("BarCode")]
-        [MaxLength(10)]
-        public string BarCode { get; set; }
-
-        /// <summary>
-        /// Código interno do produto.
-        /// </summary>
-        [Column("InternCode")]
-        [MaxLength(50)]
-        public string? InternCode { get; set; }
-
-        /// <summary>
-        /// Preço de venda do produto.
+        /// Valor do produto.
         /// </summary>
         [Required]
         [Column("Price")]
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Código interno do produto.
+        /// </summary>
+        [Column("Code")]
+        [MaxLength(50)]
+        public string? Code { get; set; }
+
+        /// <summary>
+        /// Estoque disponível.
+        /// </summary>
+        [Required]
+        [Column("Stock")]
+        public int Stock { get; set; }
+
+        /// <summary>
+        /// Flag indicando se o produto está ativo.
+        /// </summary>
+        [Required]
+        [Column("Active")]
+        public bool Active { get; set; }
 
         /// <summary>
         /// Data/Hora de cadastro do produto no sistema.
