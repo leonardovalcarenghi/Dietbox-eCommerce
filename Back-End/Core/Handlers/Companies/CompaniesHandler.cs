@@ -1,5 +1,9 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Companies;
+using Dietbox.ECommerce.Core.DTO.Companies;
+using Dietbox.ECommerce.Core.Exceptions;
+using Dietbox.ECommerce.Core.Interfaces;
 using Dietbox.ECommerce.Core.Interfaces.Companies;
+using Dietbox.ECommerce.Core.Validations.Companies;
 using Dietbox.ECommerce.ORM.Entities.Companies;
 using Dietbox.ECommerce.ORM.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,36 +19,32 @@ namespace Dietbox.ECommerce.Core.Handlers.Companies
     {
 
         private readonly IRepository<Company> _repository;
+        private readonly ICommandValidator _validator;
 
-        public CompaniesHandler(IRepository<Company> repository)
+        public CompaniesHandler(
+            IRepository<Company> repository,
+            ICommandValidator validator
+        )
         {
             _repository = repository;
+            _validator = validator;
         }
 
-        public async Task Create(CreateCompanyCommand command)
+        public async Task<CompanyDTO> Create(CreateCompanyCommand command)
         {
-            if (command is null)
-                throw new Exception("Parâmetro inválido.");
 
-            if (string.IsNullOrEmpty(command.Name) || string.IsNullOrWhiteSpace(command.Name))
-                throw new Exception("Nome da empresa não informado.");
+            (bool isValid, List<string> messages) = await _validator.Validate<CreateCompanyValidator, CreateCompanyCommand>(command);
+            if (isValid is false)
+                throw new InvalidParameterException(messages.ToArray(), "Ocorreu um problema ao criar a empresa.");
 
-            if (command.Name.Length > 100)
-                throw new Exception(string.Format("O campo 'Nome' não pode excer o limite de {0} caracteres", 100));
 
-            if (string.IsNullOrEmpty(command.CNPJ) || string.IsNullOrWhiteSpace(command.CNPJ))
-                throw new Exception("CNPJ da empresa não informado.");
+            // converter command to entity:
 
-            if (command.CNPJ.Length is not 14)
-                throw new Exception("O campo 'CNPJ' contém 14 caracteres.");
+            // salvar no banco:
 
-            if (!command.CNPJ.All(char.IsDigit))
-                throw new Exception("O campo 'CNPJ' está inválido.");
 
-            bool existsCNPJ = await _repository.Get(_ => _.CNPJ == command.CNPJ).AnyAsync();
-            if (existsCNPJ)
-                throw new Exception("O CNPJ informado já possui cadastro.");
 
+            return new();
         }
     }
 }

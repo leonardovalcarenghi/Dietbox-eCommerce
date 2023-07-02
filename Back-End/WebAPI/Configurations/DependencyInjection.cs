@@ -21,9 +21,14 @@ namespace Dietbox.ECommerce.WebAPI.Configurations
 
             services.RegisterServicesForORM(configuration);
 
-          
 
-            
+
+            services.RegisterServicesForCompanies();
+
+
+
+
+
         }
 
     }

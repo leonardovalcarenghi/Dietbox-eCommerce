@@ -8,16 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Companies\" />
     <Folder Include="DTO\Products\" />
     <Folder Include="DTO\Users\" />
     <Folder Include="Handlers\Users\" />
     <Folder Include="Interfaces\Users\" />
-    <Folder Include="Mappers\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />

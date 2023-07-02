@@ -1,4 +1,5 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Companies;
+using Dietbox.ECommerce.Core.DTO.Companies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Dietbox.ECommerce.Core.Interfaces.Companies
         /// </summary>
         /// <param name="command">Comando de criação da empresa.</param>
         /// <returns></returns>
-        Task Create(CreateCompanyCommand command);
+        Task<CompanyDTO> Create(CreateCompanyCommand command);
 
     }
 }
