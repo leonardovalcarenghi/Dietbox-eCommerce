@@ -1,4 +1,4 @@
-﻿using Dietbox.ECommerce.Core.Settings;
+﻿using Dietbox.ECommerce.Core.DTO.AppSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +30,16 @@ namespace Dietbox.ECommerce.Core.Interfaces
         /// </summary>
         public string ConnectionString { get; }
 
+
         /// <summary>
-        /// Chave de criptografia do JWT.
+        /// Configurações do Google Recaptcha.
         /// </summary>
-        public string JsonWebTokenKey { get; }
+        public AppSettings_GoogleRecaptcha Recaptcha { get; }
+
+        /// <summary>
+        /// Configurações do Json Web Token.
+        /// </summary>
+        public AppSettings_JsonWebToken JWT { get; }
 
 
     }

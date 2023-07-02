@@ -1,7 +1,6 @@
 ﻿using Dietbox.ECommerce.Core;
 using Dietbox.ECommerce.Core.Interfaces;
 using Dietbox.ECommerce.Core.Services;
-using Dietbox.ECommerce.Core.Settings;
 using Dietbox.ECommerce.Core.Validations;
 using Dietbox.ECommerce.WebAPI.Configurations.Services;
 

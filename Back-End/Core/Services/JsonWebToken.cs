@@ -20,10 +20,10 @@ namespace Dietbox.ECommerce.Core.Services
             _settings = settings;
         }
 
-        public string GenerateToken(User user)
+        public string GenerateToken(Customer user)
         {
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(_settings.JsonWebTokenKey);
+            byte[] buffer = Encoding.ASCII.GetBytes(_settings.JWT.Key);
             SecurityTokenDescriptor tokenDescriptor = new()
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -32,12 +32,12 @@ namespace Dietbox.ECommerce.Core.Services
                     new Claim("Name", user.Name),
                     new Claim("Email", user.Email)
                 }),
-                Expires = DateTime.UtcNow.AddHours(12),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.AddHours(_settings.JWT.HoursToExpire),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(buffer), SecurityAlgorithms.HmacSha256Signature)
             };
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-            string tokenString = tokenHandler.WriteToken(token);
-            return tokenString;
+            SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            string token = tokenHandler.WriteToken(securityToken);
+            return token;
 
         }
     }

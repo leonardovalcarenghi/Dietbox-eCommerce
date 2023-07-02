@@ -21,7 +21,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
 
             // Entidades:
             services.UseReposityTo<Company>();
-            services.UseReposityTo<User>();
+            services.UseReposityTo<Customer>();
             services.UseReposityTo<Product>();
 
         }

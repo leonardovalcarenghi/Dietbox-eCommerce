@@ -1,5 +1,5 @@
-﻿using Dietbox.ECommerce.Core.Interfaces;
-using Dietbox.ECommerce.Core.Settings;
+﻿using Dietbox.ECommerce.Core.DTO.AppSettings;
+using Dietbox.ECommerce.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
@@ -13,8 +13,13 @@ namespace Dietbox.ECommerce.Core
         public string CurrentDirectory { get; }
         public string CurrentBaseURL { get; }
         public string Environment { get; }
-        public string ConnectionString { get; }
-        public string JsonWebTokenKey { get; }
+        public string ConnectionString { get; }  
+
+        public AppSettings_GoogleRecaptcha Recaptcha { get; }
+
+        public AppSettings_JsonWebToken JWT { get; }
+
+
 
         public AppSettings(IConfiguration configuration)
         {
@@ -22,7 +27,24 @@ namespace Dietbox.ECommerce.Core
             CurrentBaseURL = null;
             Environment = configuration.GetSection("Environment").Value;
             ConnectionString = configuration.GetSection("ConnectionString").Value;
-            JsonWebTokenKey = configuration.GetSection("JsonWebToken:Key").Value;
+        
+
+
+            IConfigurationSection recaptchaSection = configuration.GetSection("GoogleRecaptcha");
+            Recaptcha = new()
+            {
+                Enabled = bool.Parse(recaptchaSection["Enabled"]),
+                API = recaptchaSection["API"],
+                Secret = recaptchaSection["Secret"],
+            };
+
+            IConfigurationSection jwtSection = configuration.GetSection("JsonWebToken");
+            JWT = new()
+            {
+                Key = jwtSection["Key"],
+                HoursToExpire = int.Parse(jwtSection["HoursToExpire"])
+            };
+
         }
 
         //public AppSettings(IHttpContextAccessor httpContext, IConfiguration configuration)
