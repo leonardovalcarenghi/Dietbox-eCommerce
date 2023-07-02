@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dietbox.ECommerce.WebAPI.Controllers
 {
-    [Route("users")]
+
     [ApiController]
+    [Route("users")] 
+    [ApiExplorerSettings(GroupName = "Usuários")]
     public class UsersController : BaseController
     {
 

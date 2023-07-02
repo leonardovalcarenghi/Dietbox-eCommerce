@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Dietbox.ECommerce.WebAPI</RootNamespace>
     <AssemblyName>Dietbox.ECommerce.API</AssemblyName>
+    <Title>Dietbox ECommerce API</Title>
+    <Authors>Leonardo Valcarenghi</Authors>
+    <Company>Dietbox</Company>
+    <Description>API de comunicação front-end.</Description>
+    <RepositoryUrl>https://github.com/leonardovalcarenghi/Dietbox-eCommerce</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/leonardovalcarenghi/Dietbox-eCommerce</PackageProjectUrl>
+    <Copyright>Leonardo Valcarenghi</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

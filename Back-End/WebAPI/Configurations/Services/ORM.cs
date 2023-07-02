@@ -1,7 +1,9 @@
 ﻿using Dietbox.ECommerce.Core.Interfaces;
 using Dietbox.ECommerce.ORM;
 using Dietbox.ECommerce.ORM.Contexts;
+using Dietbox.ECommerce.ORM.Entities.Companies;
 using Dietbox.ECommerce.ORM.Entities.Products;
+using Dietbox.ECommerce.ORM.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Runtime;
@@ -18,6 +20,8 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
             services.UseAllConfigurations();
 
             // Entidades:
+            services.UseReposityTo<Company>();
+            services.UseReposityTo<User>();
             services.UseReposityTo<Product>();
 
         }

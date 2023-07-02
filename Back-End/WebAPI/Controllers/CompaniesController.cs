@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dietbox.ECommerce.WebAPI.Controllers
 {
-    [Route("companies")]
+
     [ApiController]
+    [Route("companies")]
+    [ApiExplorerSettings(GroupName = "Empresas")]
     public class CompaniesController : BaseController
     {
 

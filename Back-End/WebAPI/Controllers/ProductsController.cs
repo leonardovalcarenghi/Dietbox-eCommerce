@@ -1,11 +1,15 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dietbox.ECommerce.WebAPI.Controllers
 {
-    [Route("products")]
+
+    [Authorize]
     [ApiController]
+    [Route("products")]
+    [ApiExplorerSettings(GroupName = "Produtos")]
     public class ProductsController : BaseController
     {
 

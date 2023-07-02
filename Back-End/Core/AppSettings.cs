@@ -14,6 +14,7 @@ namespace Dietbox.ECommerce.Core
         public string CurrentBaseURL { get; }
         public string Environment { get; }
         public string ConnectionString { get; }
+        public string JsonWebTokenKey { get; }
 
         public AppSettings(IConfiguration configuration)
         {
@@ -21,6 +22,7 @@ namespace Dietbox.ECommerce.Core
             CurrentBaseURL = null;
             Environment = configuration.GetSection("Environment").Value;
             ConnectionString = configuration.GetSection("ConnectionString").Value;
+            JsonWebTokenKey = configuration.GetSection("JsonWebToken:Key").Value;
         }
 
         //public AppSettings(IHttpContextAccessor httpContext, IConfiguration configuration)

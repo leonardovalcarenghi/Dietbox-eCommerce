@@ -30,6 +30,11 @@ namespace Dietbox.ECommerce.Core.Interfaces
         /// </summary>
         public string ConnectionString { get; }
 
+        /// <summary>
+        /// Chave de criptografia do JWT.
+        /// </summary>
+        public string JsonWebTokenKey { get; }
+
 
     }
 }
