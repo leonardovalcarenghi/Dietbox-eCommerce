@@ -11,10 +11,7 @@
     <Folder Include="DTO\Companies\" />
     <Folder Include="DTO\Products\" />
     <Folder Include="DTO\Users\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Handlers\Companies\" />
     <Folder Include="Handlers\Users\" />
-    <Folder Include="Interfaces\Companies\" />
     <Folder Include="Interfaces\Users\" />
     <Folder Include="Mappers\" />
     <Folder Include="Queries\" />
@@ -25,6 +22,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ORM\ORM.csproj" />
   </ItemGroup>
 
 </Project>
