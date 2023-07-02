@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "./Components/NavBar";
 import Product from "./Components/Product";
+import Footer from "./Components/Footer";
 
 function App() {
   const produto01 = {
@@ -43,11 +44,19 @@ function App() {
 
       <div className="container-fluid p-5">
         <div className="row">
-          <Product {...produto01} />
-          <Product {...produto02} />
-          <Product {...produto03} />
+          <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
+            <Product {...produto01} />
+          </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
+            <Product {...produto02} />
+          </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
+            <Product {...produto03} />
+          </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

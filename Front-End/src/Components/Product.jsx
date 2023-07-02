@@ -8,8 +8,8 @@ export default function Product(props) {
     return (
         <>
 
-            <div className={"card m-2 " + (!active && "card-disabled")} style={{ maxWidth: 540 }} product-id={id} key={id}>
-                <div className="row g-0">
+            <div className={"card ps-0 m-2 " + (!active && "card-disabled")} product-id={id} key={id}>
+                <div className="row g-0 align-items-center">
                     <div className="col-md-4">
                         <img src="https://placehold.co/400x600" className="img-fluid rounded-start" alt="..." />
                     </div>
@@ -23,7 +23,14 @@ export default function Product(props) {
                                 </small>
                             </p>
 
-                            <h5>R$ {price ? DecimalToMoney(price) : "0,00"}</h5>
+                            <h5>
+                                <span>
+                                    R$ {price ? DecimalToMoney(price) : "0,00"}
+                                </span>
+                                <small className="d-block text-muted small" style={{ fontSize: "12.8px" }}>
+                                    10x R$ {price ? DecimalToMoney(price / 10) : "0,00"}
+                                </small>
+                            </h5>
 
                             <button href="#" className="btn btn-success me-2" disabled={stock == 0 || !active}>
                                 <i className="bi bi-bag-fill me-2"></i>
