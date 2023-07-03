@@ -41,12 +41,43 @@ export default function ViewProductPage() {
 
 
             <div className="container pt-5">
-                <div className="row">
+                <div className="row justify-content-center">
 
                     {/* Imagem */}
-                    <div className="col-6 d-flex justify-content-center">
+                    <div className="col-5">
 
-                        <img src="https://placehold.co/400x400" className="img-fluid rounded-start" alt="..." />
+                        <div id="carouselExample" className="carousel slide carousel-fade carousel-dark">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img src="https://placehold.co/550x400" className="img-fluid rounded" alt="..." />
+                                </div>
+                                <div className="carousel-item">
+                                    <img src="https://placehold.co/550x400/orange/white" className="img-fluid rounded" alt="..." />
+                                </div>
+                                <div className="carousel-item">
+                                    <img src="https://placehold.co/550x400/blue/white" className="img-fluid rounded" alt="..." />
+                                </div>
+                            </div>
+                            <button
+                                className="carousel-control-prev"
+                                type="button"
+                                data-bs-target="#carouselExample"
+                                data-bs-slide="prev"
+                            >
+                                <span className="carousel-control-prev-icon" aria-hidden="true" />
+                                <span className="visually-hidden">Previous</span>
+                            </button>
+                            <button
+                                className="carousel-control-next"
+                                type="button"
+                                data-bs-target="#carouselExample"
+                                data-bs-slide="next"
+                            >
+                                <span className="carousel-control-next-icon" aria-hidden="true" />
+                                <span className="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
 
                     </div>
 
