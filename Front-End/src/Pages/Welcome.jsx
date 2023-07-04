@@ -26,7 +26,7 @@ export default function WelcomePage() {
                             Fazer Login
                         </a>
                         <a className="btn btn-secondary btn-lg px-3" type="button" href="/criar-conta">
-                            <i className="bi bi-person-fill-add me-2" />
+                            <i className="bi bi-plus-circle me-2" />
                             Criar Conta
                         </a>
                     </p>

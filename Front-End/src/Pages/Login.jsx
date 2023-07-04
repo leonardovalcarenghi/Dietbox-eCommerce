@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IsEmail } from "../Utils";
 import { Post } from "../Request";
 
 export default function LoginPage({ setIsAuth }) {
 
+    const [createAccountSuccess, setCreateAccountSuccess] = useState(!!(sessionStorage["createAccountSuccess"]));
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -13,6 +14,13 @@ export default function LoginPage({ setIsAuth }) {
 
     const [emailMessage, setEmailMessage] = useState("");
     const [passwordMessage, setPasswordMessage] = useState("");
+
+    useEffect(() => {
+
+        delete sessionStorage["createAccountSuccess"];
+
+    }, [createAccountSuccess])
+
 
     /**
      * Realizar login do usuário.
@@ -37,7 +45,7 @@ export default function LoginPage({ setIsAuth }) {
             setLoading(false);
             setError(error);
         }
-        
+
     }
 
     /**
@@ -54,7 +62,7 @@ export default function LoginPage({ setIsAuth }) {
 
         if (!IsEmail(email)) {
             document.getElementById("emailInput").focus();
-            setEmailMessage("O e-mail digitado não é válido.");
+            setEmailMessage("O e-mail digitado é inválido.");
             return false;
         }
 
@@ -77,9 +85,26 @@ export default function LoginPage({ setIsAuth }) {
 
                             <div className="card-body">
                                 <h5 className="card-title display-6">Login</h5>
-                                <p className="card-text">Insira suas credenciais para acessar o sistema.</p>
+                                <p className="card-text">
+                                    <span>Insira suas credenciais para acessar o sistema.</span>
+                                    {/* <small className="d-block">Não tem uma conta? <a href="/criar-conta">Clique aqui</a> para criar uma.</small> */}
+                                </p>
 
 
+                                <ul className="nav nav-pills nav-fill mb-3">
+                                    <li className="nav-item">
+                                        <a className={`nav-link ${loginAs == 1 && "active"}`} aria-current="page" onClick={() => setLoginAs(1)} href={"javascript:;"}>
+                                            <i className="bi bi-person-fill me-2"></i>
+                                            Cliente
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className={`nav-link nav-link-company ${loginAs == 2 && "active"}`} onClick={() => setLoginAs(2)} href={"javascript:;"}>
+                                            <i className="bi bi-building-fill me-1"></i>
+                                            Empresa
+                                        </a>
+                                    </li>
+                                </ul>
 
                                 <form>
 
@@ -121,56 +146,40 @@ export default function LoginPage({ setIsAuth }) {
                                         </div>
                                     </div>
 
-                                    <div className="mb-3">
-                                        <label className="form-label" htmlFor="emailInput">
-                                            {/* <i class="bi bi-person me-2"></i> */}
-                                            Entrar como
-                                        </label>
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="loginAsRadio"
-                                                id="customerRadio"
-                                                checked={loginAs == 1}
-                                                onChange={() => setLoginAs(1)}
-                                                disabled={loading}
-                                            />
-                                            <label className="form-check-label" htmlFor="customerRadio">
-                                                <i className="bi bi-person-fill me-1"></i>
-                                                Cliente
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="loginAsRadio"
-                                                id="companyRadio"
-                                                checked={loginAs == 2}
-                                                onChange={() => setLoginAs(2)}
-                                                disabled={loading}
-                                            />
-                                            <label className="form-check-label" htmlFor="companyRadio">
-                                                <i className="bi bi-building-fill me-1"></i>
-                                                Empresa
-                                            </label>
-                                        </div>
-                                    </div>
 
                                 </form>
+
+                                {
+                                    createAccountSuccess &&
+                                    <>
+                                        <div class="alert bg-success text-white" role="alert">
+                                            Sua conta foi criada com êxito!
+                                        </div>
+                                    </>
+                                }
+
 
                                 {
                                     error &&
                                     <>
                                         <div class="alert alert-danger" role="alert">
-                                            {error ? error.message : "Ocorreu um erro ao tentar fazer login."}
+                                            <ul className="mb-0">
+                                                {
+                                                    error.messages.map((message) => <li>{message}</li>)
+                                                }
+                                            </ul>
                                         </div>
                                     </>
                                 }
 
+                                <p className="card-text">
+                                    <small>
+                                        Não tem uma conta? <a href="/criar-conta" style={{ textDecoration: "none" }}>Clique aqui</a> para criar uma.
+                                    </small>
+                                </p>
+
                                 <button
-                                    className="btn btn-primary px-5"
+                                    className={"btn px-5 " + (loginAs == 2 ? "btn-success" : "btn-primary")}
                                     type="button"
                                     style={{ width: "100%" }}
                                     onClick={() => Login()}
@@ -185,7 +194,7 @@ export default function LoginPage({ setIsAuth }) {
                                             :
                                             <>
                                                 <i className="bi bi-box-arrow-in-right me-2" />
-                                                Login
+                                                {loginAs == 2 ? <>Entrar como <strong>Empresa</strong></> : <>Entrar como <strong>Cliente</strong></>}
                                             </>
                                     }
 
@@ -198,7 +207,7 @@ export default function LoginPage({ setIsAuth }) {
                                     onClick={() => window.location.href = "/"}
                                     disabled={loading}>
                                     <i class="bi bi-arrow-left me-2"></i>
-                                    Voltar
+                                    Início
                                 </button>
 
 

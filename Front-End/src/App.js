@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "./App.css";
 
 // Páginas Públicas:
@@ -34,6 +38,14 @@ export default function App() {
     {
       path: "produtos/cadastro",
       element: <NewProductPage />,
+    },
+    {
+      path: "criar-conta",
+      element: <Navigate to="/" replace={true} />,
+    },
+    {
+      path: "login",
+      element: <Navigate to="/" replace={true} />,
     },
   ]);
 

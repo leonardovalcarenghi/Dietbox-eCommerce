@@ -11,3 +11,9 @@
   padding-bottom: 0px;
   margin-bottom: -2px;
 }
+
+.nav-link-company.active{
+    color: #fff !important;
+    background-color: #157347 !important;
+    border-color: #146c43 !important;
+}
