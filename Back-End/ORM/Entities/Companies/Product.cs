@@ -44,6 +44,13 @@ namespace Dietbox.ECommerce.ORM.Entities.Companies
         public string? Description { get; set; }
 
         /// <summary>
+        /// Marca do produto.
+        /// </summary>
+        [Column("Brand")]
+        [MaxLength(50)]
+        public string? Brand { get; set; }
+
+        /// <summary>
         /// Valor do produto.
         /// </summary>
         [Required]

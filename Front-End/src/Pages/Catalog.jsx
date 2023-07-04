@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Product from "../Components/Product";
 
-export default function HomePage() {
-
+export default function CatalogPage() {
 
     const [products, setProducts] = useState([]);
 
@@ -77,5 +76,5 @@ export default function HomePage() {
                 </div>
             </div>
         </>
-    );
+    )
 }

@@ -3,7 +3,7 @@ import { DecimalToMoney } from "../Utils";
 
 export default function Product(props) {
 
-    const { id, name, description, stock, price, active, loading } = props;
+    const { id, name, description, brand = "", stock, price, active, loading } = props;
 
     return (
         loading ?
@@ -11,14 +11,20 @@ export default function Product(props) {
                 <div className={"card ps-0 m-2 " + (!active && "card-disabled")} product-id={id} key={id}>
                     <div className="row g-0 align-items-center">
                         <div className="col-md-4">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
+                            <svg class="bd-placeholder-img card-img-top rounded-start" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
 
-                                <h5 class="card-title placeholder-wave">
-                                    <span class="placeholder col-10"></span>
-                                </h5>
+
+                                <div className="placeholder-wave">
+                                    <h5 class="card-title ">
+                                        <span class="placeholder col-10"></span>
+                                    </h5>
+                                    <span class="placeholder col-2 placeholder-xs" style={{ marginTop: "-20px" }}></span>
+                                </div>
+
+
 
                                 <p class="card-text placeholder-wave">
                                     <span class="placeholder col-12 placeholder-sm"></span>
@@ -52,8 +58,14 @@ export default function Product(props) {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h5 className="card-title">{name}</h5>
-                                <p className="card-text">{description}</p>
+
+                                <div>
+                                    <h5 className="card-title mb-0">{name}</h5>
+                                    <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
+                                </div>
+
+
+                                <p className="card-text mt-3">{description}</p>
                                 <p className="card-text">
                                     <small className="text-muted">
                                         {stock || 0} unidades disponíveis.

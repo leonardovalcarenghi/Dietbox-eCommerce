@@ -9,7 +9,7 @@ export default function ViewProductPage() {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { name, description, price, stock, active } = product || { stock: 1, active: true };
+    const { name, description, brand, price, stock, active } = product || { stock: 1, active: true };
 
 
     useEffect(() => {
@@ -85,7 +85,8 @@ export default function ViewProductPage() {
                     <div className="col-6">
 
                         <div>
-                            <h3>{name || "Lorem ipsum dolor sit amet."}</h3>
+                            <h3 className="pb-0 mb-0">{name || "Lorem ipsum dolor sit amet."}</h3>
+                            <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
                         </div>
 
                         <div className="mt-3">
