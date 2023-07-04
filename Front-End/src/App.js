@@ -28,12 +28,12 @@ export default function App() {
   const PrivateRoutes = createBrowserRouter([
     {
       path: "/",
-      element: <CatalogPage />,
+      element: <CatalogPage isCompany={isCompany} />,
       errorElement: <Error404Page />,
     },
     {
       path: "produto/:productID",
-      element: <ViewProductPage />,
+      element: <ViewProductPage isCompany={isCompany} />,
     },
     {
       path: "produtos/cadastro",

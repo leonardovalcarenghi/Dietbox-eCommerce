@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import { DecimalToMoney } from "../Utils";
 import { Get } from "../Request";
 
-export default function ViewProductPage() {
+export default function ViewProductPage(props) {
 
     const { productID } = useParams();
+    const { isCompany } = props;
     const [product, setProduct] = useState(null);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
@@ -201,7 +202,7 @@ export default function ViewProductPage() {
 
                                 <div className="col-12">
                                     {
-                                        stock == 0 || !active ?
+                                        stock == 0 ?
                                             <>
                                                 <button
                                                     className="btn btn-outline-secondary"
@@ -215,34 +216,42 @@ export default function ViewProductPage() {
                                             </>
                                             :
                                             <>
-                                                <button
-                                                    className={"btn btn-primary " + (loading && "placeholder ")}
-                                                    style={{ width: "100%" }}
-                                                    onClick={() => { alert("Funcionalidade indisponível.") }}
-                                                    disabled={loading}
-                                                >
-                                                    {
-                                                        !loading &&
-                                                        <>
-                                                            <i className="bi bi-cart-plus-fill me-2"></i>
-                                                            Adicionar ao Carrinho
-                                                        </>
-                                                    }
-                                                </button>
 
-                                                <button
-                                                    className={"btn btn-success mt-2 " + (loading && "placeholder")}
-                                                    style={{ width: "100%" }}
-                                                    disabled={loading}
-                                                >
-                                                    {
-                                                        !loading &&
-                                                        <>
-                                                            <i className="bi bi-bag-fill me-2"></i>
-                                                            Comprar Agora
-                                                        </>
-                                                    }
-                                                </button>
+
+                                                {
+                                                    !isCompany &&
+                                                    <>
+                                                        <button
+                                                            className={"btn btn-primary " + (loading && "placeholder ")}
+                                                            style={{ width: "100%" }}
+                                                            onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                            disabled={loading}
+                                                        >
+                                                            {
+                                                                !loading &&
+                                                                <>
+                                                                    <i className="bi bi-cart-plus-fill me-2"></i>
+                                                                    Adicionar ao Carrinho
+                                                                </>
+                                                            }
+                                                        </button>
+
+                                                        <button
+                                                            className={"btn btn-success mt-2 " + (loading && "placeholder")}
+                                                            style={{ width: "100%" }}
+                                                            disabled={loading}
+                                                        >
+                                                            {
+                                                                !loading &&
+                                                                <>
+                                                                    <i className="bi bi-bag-fill me-2"></i>
+                                                                    Comprar Agora
+                                                                </>
+                                                            }
+                                                        </button>
+                                                    </>
+                                                }
+
 
 
                                             </>

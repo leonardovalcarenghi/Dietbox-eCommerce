@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import Product from "../Components/Product";
 import { Get } from "../Request";
 
-export default function CatalogPage() {
+export default function CatalogPage(props) {
 
     const productLoading = { loading: true }
+    const { isCompany } = props;
     const [products, setProducts] = useState([productLoading, productLoading, productLoading]);
     const [error, setError] = useState(null);
 
@@ -59,7 +60,7 @@ export default function CatalogPage() {
                         products.map((product) =>
                             <>
                                 <div className="col-12 col-md-6 col-lg-6 col-xxl-4">
-                                    <Product {...product} />
+                                    <Product {...product} isCompany={isCompany} />
                                 </div>
                             </>
                         )

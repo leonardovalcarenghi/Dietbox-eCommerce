@@ -3,6 +3,7 @@ import { DecimalToMoney } from "../Utils";
 
 export default function Product(props) {
 
+    const { isCompany } = props;
     const { id, name, description, brand = "", stock, price, active, loading } = props;
 
     return (
@@ -88,10 +89,15 @@ export default function Product(props) {
                                     </small>
                                 </h5>
 
-                                <button className="btn btn-success me-2" disabled={stock == 0 || !active}>
-                                    <i className="bi bi-bag-fill me-2"></i>
-                                    {stock == 0 ? "Indisponível" : "Comprar"}
-                                </button>
+                                {
+                                    !isCompany &&
+                                    <button className="btn btn-success me-2" disabled={stock == 0 || !active}>
+                                        <i className="bi bi-bag-fill me-2"></i>
+                                        {stock == 0 ? "Indisponível" : "Comprar"}
+                                    </button>
+                                }
+
+
                                 <button className="btn btn-primary " disabled={!active} onClick={() => window.location.href = `/produto/${id}`}>
                                     <i className="bi bi-box-arrow-up-right me-2"></i>
                                     Detalhes

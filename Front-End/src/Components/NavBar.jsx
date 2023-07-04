@@ -17,7 +17,7 @@ export default function NavBar(props) {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-primary navbar-dark">
+            <nav className={"navbar navbar-expand-lg  navbar-dark " + (isCompany ? "bg-success" : "bg-primary")}>
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
                         Dietbox e-Commerce
