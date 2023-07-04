@@ -8,11 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Products\" />
     <Folder Include="DTO\Users\" />
     <Folder Include="Handlers\Users\" />
     <Folder Include="Interfaces\Users\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>

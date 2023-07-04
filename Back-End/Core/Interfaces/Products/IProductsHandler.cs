@@ -1,4 +1,5 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Products;
+using Dietbox.ECommerce.Core.DTO.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Dietbox.ECommerce.Core.Interfaces.Products
         /// </summary>
         /// <param name="command">Comando de criação de produto.</param>
         /// <returns></returns>
-        Task Create(CreateProductCommand command);
+        Task<ProductDTO> Create(CreateProductCommand command);
 
 
         /// <summary>
