@@ -15,17 +15,13 @@ namespace Dietbox.ECommerce.Core.Exceptions
 
         public string[] Messages { get; }
 
-        public string? Title { get; }
-
         /// <summary>
         /// Excessão de parâmetro inválido, retorna um HttpStatusCode 400.
         /// </summary>
         /// <param name="messages">Mensagens.</param>
-        /// <param name="title">Título</param>
-        public InvalidParameterException(string[] messages, string? title = null)
+        public InvalidParameterException(string[] messages)
         {
             Messages = messages;
-            Title = title;
         }
 
         /// <summary>
@@ -33,10 +29,9 @@ namespace Dietbox.ECommerce.Core.Exceptions
         /// </summary>
         /// <param name="messages">Array de mensagens.</param>
         /// <param name="title">Título.</param>
-        public InvalidParameterException(string message, string? title = null)
+        public InvalidParameterException(string message)
         {
             Messages = new string[] { message };
-            Title = title;
         }
 
     }

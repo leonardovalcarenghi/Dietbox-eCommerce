@@ -16,7 +16,8 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
         public static void RegisterServicesForORM(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton(x => services.GetType().Assembly);
-            services.UseBasicContextTo("Server=localhost\\SQLEXPRESS; Database=master; Trusted_Connection=True;");
+            //services.UseBasicContextTo("Server=localhost\\SQLEXPRESS; Database=master; Trusted_Connection=True;");
+            services.UseBasicContextTo("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Leonardo\\Desktop\\Dietbox-eCommerce\\Back-End\\Core\\DataBase.mdf;Integrated Security=True");
             services.UseAllConfigurations();
 
             // Entidades:

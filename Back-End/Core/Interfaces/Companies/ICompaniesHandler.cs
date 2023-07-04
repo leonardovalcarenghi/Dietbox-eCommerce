@@ -15,8 +15,7 @@ namespace Dietbox.ECommerce.Core.Interfaces.Companies
         /// Criar empresa.
         /// </summary>
         /// <param name="command">Comando de criação da empresa.</param>
-        /// <returns></returns>
-        Task<CompanyDTO> Create(CreateCompanyCommand command);
+        Task CreateAccount(CreateCompanyAccountCommand command);
 
     }
 }

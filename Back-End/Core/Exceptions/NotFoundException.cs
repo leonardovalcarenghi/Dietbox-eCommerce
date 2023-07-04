@@ -15,28 +15,22 @@ namespace Dietbox.ECommerce.Core.Exceptions
 
         public string[] Messages { get; }
 
-        public string? Title { get; }
-
         /// <summary>
         /// Excessão para quando uma entidade não é encontrada, retorna um HttpStatusCode 404.
         /// </summary>
         /// <param name="messages">Array de mensagens.</param>
-        /// <param name="title">Título.</param>
-        public NotFoundException(string[] messages, string? title = null)
+        public NotFoundException(string[] messages)
         {
             Messages = messages;
-            Title = title;
         }
 
         /// <summary>
         /// Excessão para quando uma entidade não é encontrada, retorna um HttpStatusCode 404.
         /// </summary>
         /// <param name="message">Mensagem.</param>
-        /// <param name="title">Título.</param>
-        public NotFoundException(string message, string? title = null)
+        public NotFoundException(string message)
         {
             Messages = new string[] { message };
-            Title = title;
         }
 
     }

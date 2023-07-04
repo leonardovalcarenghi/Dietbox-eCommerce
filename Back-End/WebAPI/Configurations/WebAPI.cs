@@ -1,4 +1,6 @@
-﻿namespace Dietbox.ECommerce.WebAPI.Configurations
+﻿using Dietbox.ECommerce.WebAPI.Configurations.Middlewares;
+
+namespace Dietbox.ECommerce.WebAPI.Configurations
 {
     public static class WebAPIConfiguration
     {
@@ -40,7 +42,7 @@
                 app.UseHsts();
             }
 
-            //app.UseAppExceptions(); 
+            app.UseAppExceptions(); 
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();

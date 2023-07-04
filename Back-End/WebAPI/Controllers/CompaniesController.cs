@@ -1,4 +1,5 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Companies;
+using Dietbox.ECommerce.Core.Interfaces.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +13,22 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
     public class CompaniesController : BaseController
     {
 
-        public CompaniesController()
-        {
+        private readonly ICompaniesHandler _handler;
 
+        public CompaniesController(ICompaniesHandler handler)
+        {
+            _handler = handler;
         }
 
-
+        /// <summary>
+        /// [ EndPoint ] Criar conta de empresa.
+        /// </summary>
         [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateCompanyCommand command)
+        [HttpPost("create-account")]
+        public async Task<IActionResult> CreateAccount(CreateCompanyAccountCommand command)
         {
-            throw new NotImplementedException();
+            await _handler.CreateAccount(command);
+            return Ok(null, "Empresa cadastrada com êxito.");
         }
 
         [AllowAnonymous]

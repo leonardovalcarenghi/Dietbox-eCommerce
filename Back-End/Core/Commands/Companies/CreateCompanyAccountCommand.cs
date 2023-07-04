@@ -2,7 +2,7 @@
 
 namespace Dietbox.ECommerce.Core.Commands.Companies
 {
-    public class CreateCompanyCommand : Command
+    public class CreateCompanyAccountCommand : Command
     {
         /// <summary>
         /// Nome da empresa.

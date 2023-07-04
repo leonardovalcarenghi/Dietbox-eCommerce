@@ -11,53 +11,32 @@ namespace Dietbox.ECommerce.Core.Services
 {
     public class GoogleRecaptcha
     {
-
-        private readonly string _googleRecaptchaAPI = "https://www.google.com/recaptcha/api/siteverify";
-        private readonly string _secret = "6LfGW7olAAAAAC8ZDmdQ0aTE2mZkF0_ArOzekfYz";
-
-        public GoogleRecaptcha()
+        private readonly ISettings _settings;
+        public GoogleRecaptcha(ISettings settings)
         {
-
+            _settings = settings;
         }
 
-        public bool Validate(string recaptchaToken)
+        public async Task<bool> Validate(string recaptchaToken)
         {
-            WebRequest request = WebRequest.Create(_googleRecaptchaAPI);
-            request.ContentType = "application/json; charset=utf-8";
-            request.Method = "POST";
-
-            GoogleRecaptchaData data = new()
+            string secret = _settings.Recaptcha.Secret;
+            string url = string.Format(_settings.Recaptcha.API, secret, recaptchaToken);
+            HttpClient httpClient = new();
+            HttpResponseMessage httpResponse = await httpClient.GetAsync(url);
+            if (httpResponse.IsSuccessStatusCode)
             {
-                secret = _secret,
-                response = recaptchaToken
-            };
-
-            string json = JsonConvert.SerializeObject(data);
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            byte[] buffer = encoding.GetBytes(json);
-            request.ContentLength = buffer.Length;
-            Stream newStream = request.GetRequestStream(); //open connection
-            newStream.Write(buffer, 0, buffer.Length); // Send the data.
-            newStream.Close();
-
-            WebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader streamReader = new StreamReader(response.GetResponseStream());
-            string text = streamReader.ReadToEnd();
-
-            GoogleRecaptchaResponse? googleRecaptchaResponse = JsonConvert.DeserializeObject<GoogleRecaptchaResponse>(text);
-            streamReader.Dispose();
-
-            return googleRecaptchaResponse is null ? false : googleRecaptchaResponse.success;
+                string data = await httpResponse.Content.ReadAsStringAsync();
+                GoogleRecaptchaResponse? response = JsonConvert.DeserializeObject<GoogleRecaptchaResponse>(data);
+                return response is null ? false : response.success;
+            }
+            else
+            {
+                return false;
+            }      
         }
 
 
         #region Models JSON
-
-        private class GoogleRecaptchaData
-        {
-            public string secret { get; set; }
-            public string response { get; set; }
-        }
 
         private class GoogleRecaptchaResponse
         {
@@ -67,10 +46,8 @@ namespace Dietbox.ECommerce.Core.Services
 
             public string hostname { get; set; }
 
-
             [JsonProperty("error-codes")]
             public List<object> errorcodes { get; set; }
-
 
         }
 

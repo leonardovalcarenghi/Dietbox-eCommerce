@@ -18,7 +18,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
             services.AddScoped<ICompaniesHandler, CompaniesHandler>();
 
             // Validators:
-            services.AddScoped<CreateCompanyValidator>();
+            services.AddScoped<CreateCompanyAccountValidator>();
 
         }
 

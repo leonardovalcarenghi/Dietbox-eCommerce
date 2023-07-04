@@ -11,6 +11,5 @@ namespace Dietbox.ECommerce.Core.Interfaces
     {
         public HttpStatusCode StatusCode { get; }
         public string[] Messages { get; }
-        public string? Title { get; }
     }
 }

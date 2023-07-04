@@ -23,7 +23,7 @@ namespace Dietbox.ECommerce.Core.Mappers.Companies
 
         void CreateCompanyCommandToEntity(IMapperConfigurationExpression mapper)
         {
-            mapper.CreateMap<CreateCompanyCommand, Company>()
+            mapper.CreateMap<CreateCompanyAccountCommand, Company>()
                     .ForMember(dest => dest.Name, map => map.MapFrom(source => source.Name))
                     .ForMember(dest => dest.CNPJ, map => map.MapFrom(source => source.CNPJ))
                     .ForMember(dest => dest.Email, map => map.MapFrom(source => source.Email))

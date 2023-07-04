@@ -1,4 +1,5 @@
-﻿using Dietbox.ECommerce.ORM.Entities.Products;
+﻿using Dietbox.ECommerce.ORM.Entities.Companies;
+using Dietbox.ECommerce.ORM.Entities.Products;
 using Dietbox.ECommerce.ORM.Entities.Users;
 using Dietbox.ECommerce.ORM.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ namespace Dietbox.ECommerce.ORM.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SetConfigurations(modelBuilder);   
+            modelBuilder?.Entity<Company>();
+            modelBuilder?.Entity<Customer>();
             modelBuilder?.Entity<Product>();
         }
 
