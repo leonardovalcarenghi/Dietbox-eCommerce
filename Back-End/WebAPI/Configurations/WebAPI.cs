@@ -11,6 +11,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddHttpContextAccessor();
+            services.AddMemoryCache();
 
             // CORS:
             services.AddCors(options =>

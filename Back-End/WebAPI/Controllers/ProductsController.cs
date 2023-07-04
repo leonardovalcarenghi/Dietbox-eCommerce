@@ -3,6 +3,7 @@ using Dietbox.ECommerce.Core.Interfaces.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Dietbox.ECommerce.WebAPI.Controllers
 {
@@ -13,11 +14,13 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
     [ApiExplorerSettings(GroupName = "Produtos")]
     public class ProductsController : BaseController
     {
-
+        private readonly IMemoryCache _cache;
         private readonly IProductsHandler _handler;
         private readonly IProductsQueries _queries;
-        public ProductsController(IProductsHandler handler, IProductsQueries queries)
+
+        public ProductsController(IMemoryCache cache, IProductsHandler handler, IProductsQueries queries)
         {
+            _cache = cache;
             _handler = handler;
             _queries = queries;
         }
@@ -28,18 +31,33 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _queries.Get();
-            return Ok(result);
-        }
+            var cacheEntry = _cache.GetOrCreate("ProductsListCache",  entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
+                entry.SetPriority(CacheItemPriority.High);
+                var result =  _queries.Get().GetAwaiter().GetResult();
+                return result;
+            });
+
+            return Ok(cacheEntry);
+        }     
+
 
         /// <summary>
         /// [ EndPoint ] Buscar produto.
         /// </summary>
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
-        {
-            var result = await _queries.Get(id);
-            return Ok(result);
+        {     
+            var cacheEntry = _cache.GetOrCreate($"Product{id}Cache", entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                entry.SetPriority(CacheItemPriority.High);
+                var result = _queries.Get(id).GetAwaiter().GetResult();
+                return result;
+            });
+
+            return Ok(cacheEntry);
         }
 
         /// <summary>
