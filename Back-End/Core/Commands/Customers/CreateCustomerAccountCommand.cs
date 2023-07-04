@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dietbox.ECommerce.Core.Commands.Users
 {
-    public class CreateUserCommand : Command
+    public class CreateCustomerAccountCommand : Command
     {
 
         /// <summary>
