@@ -1,5 +1,7 @@
 ﻿using Dietbox.ECommerce.Core.Interfaces;
+using Dietbox.ECommerce.ORM.Entities.Companies;
 using Dietbox.ECommerce.ORM.Entities.Users;
+using Dietbox.ECommerce.Tenant;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,17 @@ namespace Dietbox.ECommerce.Core.Services
             _settings = settings;
         }
 
-        public string GenerateToken(Customer user)
+        public (string, DateTime?) GenerateToken(Customer customer)
+        {
+            return _generate(customer.ID, customer.Name, customer.Email, TenantType.Customer);
+        }
+
+        public (string, DateTime?) GenerateToken(Company company)
+        {
+            return _generate(company.ID, company.Name, company.Email, TenantType.Company);
+        }
+
+        private (string, DateTime?) _generate(int id, string name, string email, TenantType type)
         {
             JwtSecurityTokenHandler tokenHandler = new();
             byte[] buffer = Encoding.ASCII.GetBytes(_settings.JWT.Key);
@@ -28,17 +40,17 @@ namespace Dietbox.ECommerce.Core.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("ID", user.ID.ToString()),
-                    new Claim("Name", user.Name),
-                    new Claim("Email", user.Email)
+                    new Claim("ID", id.ToString()),
+                    new Claim("Name", name),
+                    new Claim("Email", email),
+                    new Claim("Type", ((int)type).ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(_settings.JWT.HoursToExpire),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(buffer), SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
             string token = tokenHandler.WriteToken(securityToken);
-            return token;
-
+            return (token, tokenDescriptor.Expires);
         }
     }
 }

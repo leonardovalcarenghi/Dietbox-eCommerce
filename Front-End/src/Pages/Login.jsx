@@ -35,9 +35,10 @@ export default function LoginPage({ setIsAuth }) {
         setError(null);
 
         try {
-            const result = await Post(loginAs == 1 ? "/customers/login" : "/companies/login");
-            const { authorization } = result;
-            localStorage["authorization"] = authorization;
+            const result = await Post(loginAs == 1 ? "/customers/login" : "/companies/login", { email, password });
+            const { token, expiration } = result;
+            localStorage["authorization"] = token;
+            localStorage["authorization_expiration"] = expiration;
             localStorage["loginAs"] = loginAs;
             window.location.href = "/"; // Ir para ínicio.
         }
@@ -189,7 +190,7 @@ export default function LoginPage({ setIsAuth }) {
                                         loading ?
                                             <>
                                                 <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                                Autenticando...
+                                                Entrando...
                                             </>
                                             :
                                             <>

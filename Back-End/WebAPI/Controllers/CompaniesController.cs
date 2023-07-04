@@ -35,7 +35,8 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCompanyCommand command)
         {
-            throw new NotImplementedException();
+            var result = await _handler.Login(command);
+            return Ok(result, "Login da empresa efetuado com êxito.");
         }
 
     }
