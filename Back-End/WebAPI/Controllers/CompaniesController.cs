@@ -31,6 +31,9 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
             return Ok(null, "Empresa cadastrada com êxito.");
         }
 
+        /// <summary>
+        /// [ EndPoint ] Criar fazer login da empresa.
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCompanyCommand command)

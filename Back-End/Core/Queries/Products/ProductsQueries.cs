@@ -35,7 +35,7 @@ namespace Dietbox.ECommerce.Core.Queries.Products
 
         public async Task<List<ProductDTO>> Get()
         {
-            Expression<Func<Product, bool>> expression = _tenant.Type == TenantType.Company ? (_ => _.CompanyID == _tenant.ID) : (_ => true == true);
+            Expression<Func<Product, bool>> expression = _tenant.Type == TenantType.Company ? (_ => _.CompanyID == _tenant.ID) : (_ => _.Active == true);
             List<Product> results = await _repository.Get(expression).ToListAsync();
             List<ProductDTO> products = _mapper.CreateMapper().Map<List<ProductDTO>>(results);
             return products;
