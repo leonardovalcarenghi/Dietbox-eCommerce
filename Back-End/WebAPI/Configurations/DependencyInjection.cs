@@ -30,6 +30,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations
 
 
             services.RegisterServicesForCompanies();
+            services.RegisterServicesForCustomers();
             services.RegisterServicesForProducts();
 
 
