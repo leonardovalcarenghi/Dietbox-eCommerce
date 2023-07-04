@@ -9,8 +9,10 @@ export default function ViewProductPage() {
     const [product, setProduct] = useState(null);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { name, description, brand, price, stock, active } = product || { stock: 1, active: true };
+
+    const FAKE_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat lacinia dolor. Aenean elementum dignissim fringilla. Pellentesque vulputate, diam sed maximus pulvinar, lorem magna tristique nulla, ut pretium est dui vel mi. Etiam ex nunc, tristique vitae felis id, porta lobortis odio. Sed viverra commodo ex, eget commodo lorem aliquam.";
 
 
     useEffect(() => {
@@ -25,12 +27,18 @@ export default function ViewProductPage() {
      */
     async function GetProduct() {
 
+        setLoading(true);
+        setError(null);
+
         try {
             const result = await Get(`/products/${productID}`);
             setProduct(result);
+            setLoading(false);
         }
         catch (error) {
             console.error("> FALHA AO BUSCAR PRODUTO", error);
+            setError(error);
+            setLoading(false);
         }
 
     }
@@ -47,7 +55,7 @@ export default function ViewProductPage() {
 
 
 
-            <div className="container pt-5">
+            <div className={"container pt-5 " + (loading && "placeholder-wave")}>
                 <div className="row justify-content-center">
 
                     {/* Imagem */}
@@ -92,32 +100,79 @@ export default function ViewProductPage() {
                     <div className="col-6">
 
                         <div>
-                            <h3 className="pb-0 mb-0">{name || "Lorem ipsum dolor sit amet."}</h3>
-                            <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
+                            {
+                                loading ?
+                                    <>
+                                        <span class="placeholder col-8"></span>
+                                        <span class="placeholder placeholder-xs col-3 d-block mt-2"></span>
+                                    </>
+                                    :
+                                    <>
+                                        <h3 className="pb-0 mb-0">{name || "Lorem ipsum dolor sit amet."}</h3>
+                                        <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
+                                    </>
+                            }
                         </div>
 
                         <div className="mt-3">
-                            <label class="produto-details-label">Descrição</label>
-                            <p>{description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat lacinia dolor. Aenean elementum dignissim fringilla. Pellentesque vulputate, diam sed maximus pulvinar, lorem magna tristique nulla, ut pretium est dui vel mi. Etiam ex nunc, tristique vitae felis id, porta lobortis odio. Sed viverra commodo ex, eget commodo lorem aliquam."}</p>
+                            {
+                                loading ?
+                                    <>
+                                        <span class="placeholder placeholder-xs col-2 d-block" ></span>
+                                        <span class="placeholder col-10 mt-1" style={{ minHeight: "7rem" }}></span>
+                                    </>
+                                    :
+                                    <>
+                                        <label class="produto-details-label">Descrição</label>
+                                        <p>{description || FAKE_DESCRIPTION}</p>
+                                    </>
+                            }
+
                         </div>
 
 
 
 
                         <div className="mt-3">
-                            <h2>
-                                <span>
-                                    R$ {price ? DecimalToMoney(price) : "0,00"}
-                                </span>
-                                <small className="d-block text-muted small" style={{ fontSize: "12.8px" }}>
-                                    10x R$ {price ? DecimalToMoney(price / 10) : "0,00"} sem juros.
-                                </small>
-                            </h2>
+                            {
+                                loading ?
+                                    <>
+
+                                        <span class="placeholder col-4 mt-1" style={{ minHeight: "2rem" }}></span>
+                                        <span class="placeholder placeholder-xs col-3 d-block mt-1" ></span>
+                                    </>
+                                    :
+                                    <>
+                                        <h2>
+                                            <span>
+                                                R$ {price ? DecimalToMoney(price) : "0,00"}
+                                            </span>
+                                            <small className="d-block text-muted small" style={{ fontSize: "12.8px" }}>
+                                                10x R$ {price ? DecimalToMoney(price / 10) : "0,00"} sem juros.
+                                            </small>
+                                        </h2>
+                                    </>
+                            }
+
                         </div>
 
                         <div className="mt-3">
-                            <label class="produto-details-label">Disponibilidade</label>
-                            <p>{stock || 0} unidades disponíveis.</p>
+                            {
+                                loading ?
+                                    <>
+                                        <span class="placeholder placeholder-xs col-2 d-block"></span>
+                                        <span class="placeholder col-5 mt-1 mb-2" ></span>
+                                    </>
+                                    :
+                                    <>
+                                        <label class="produto-details-label">Disponibilidade</label>
+                                        {
+                                            stock == 0 ? <p>Produto indisponível.</p> : <p>{stock} unidades disponíveis.</p>
+                                        }
+                                    </>
+                            }
+
+
                         </div>
 
                         <div className="row">
@@ -126,21 +181,45 @@ export default function ViewProductPage() {
                                 {
                                     stock == 0 || !active ?
                                         <>
-                                            <button className="btn btn-outline-secondary" style={{ width: "100%" }} onClick={() => { alert("Funcionalidade indisponível.") }}>
+                                            <button
+                                                className="btn btn-outline-secondary"
+                                                style={{ width: "100%" }}
+                                                onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                disabled={loading}
+                                            >
                                                 <i class="bi bi-send me-2"></i>
                                                 Avise-me quando chegar
                                             </button>
                                         </>
                                         :
                                         <>
-                                            <button className="btn btn-primary" style={{ width: "100%" }} onClick={() => { alert("Funcionalidade indisponível.") }}>
-                                                <i className="bi bi-cart-plus-fill me-2"></i>
-                                                Adicionar ao Carrinho
+                                            <button
+                                                className={"btn btn-primary " + (loading && "placeholder ")}
+                                                style={{ width: "100%" }}
+                                                onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                disabled={loading}
+                                            >
+                                                {
+                                                    !loading &&
+                                                    <>
+                                                        <i className="bi bi-cart-plus-fill me-2"></i>
+                                                        Adicionar ao Carrinho
+                                                    </>
+                                                }
                                             </button>
 
-                                            <button className="btn btn-success mt-2" style={{ width: "100%" }}>
-                                                <i className="bi bi-bag-fill me-2"></i>
-                                                Comprar Agora
+                                            <button
+                                                className={"btn btn-success mt-2 " + (loading && "placeholder")}
+                                                style={{ width: "100%" }}
+                                                disabled={loading}
+                                            >
+                                                {
+                                                    !loading &&
+                                                    <>
+                                                        <i className="bi bi-bag-fill me-2"></i>
+                                                        Comprar Agora
+                                                    </>
+                                                }
                                             </button>
 
 
@@ -149,13 +228,18 @@ export default function ViewProductPage() {
 
 
                                 <button
-                                    className="btn btn-outline-secondary mt-2"
+                                    className={"btn btn-outline-secondary mt-2 " + (loading && "placeholder")}
                                     type="button"
                                     style={{ width: "100%" }}
                                     onClick={() => window.location.href = "/"}
                                     disabled={loading}>
-                                    <i class="bi bi-arrow-left me-2"></i>
-                                    Voltar
+                                    {
+                                        !loading &&
+                                        <>
+                                            <i class="bi bi-arrow-left me-2"></i>
+                                            Voltar
+                                        </>
+                                    }
                                 </button>
                             </div>
 
