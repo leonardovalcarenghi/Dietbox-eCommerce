@@ -9,6 +9,7 @@ using Dietbox.ECommerce.Core.Services;
 using Dietbox.ECommerce.Core.Validations.Companies;
 using Dietbox.ECommerce.ORM.Entities.Companies;
 using Dietbox.ECommerce.ORM.Interfaces;
+using Dietbox.ECommerce.Tenant;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace Dietbox.ECommerce.Core.Handlers.Companies
                 .FirstOrDefaultAsync();
 
             (string token, DateTime? expiration) = _jsonWebToken.GenerateToken(entity);
-            AuthorizationDTO authorization = new(token, (DateTime)expiration, ECommerce.Tenant.TenantType.Company);
+            AuthorizationDTO authorization = new(token, (DateTime)expiration, TenantType.Company);
             return authorization;
         }
 
