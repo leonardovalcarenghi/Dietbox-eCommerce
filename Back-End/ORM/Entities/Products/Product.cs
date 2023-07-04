@@ -40,7 +40,7 @@ namespace Dietbox.ECommerce.ORM.Entities.Products
         /// Descrição do produto.
         /// </summary>
         [Column("Description")]
-        [MaxLength(200)]
+        [MaxLength(400)]
         public string? Description { get; set; }
 
         /// <summary>
