@@ -20,19 +20,27 @@ namespace Dietbox.ECommerce.Core.Commands.Products
         public string? Description { get; set; }
 
         /// <summary>
-        /// Código de barras do produto.
+        /// Marca do produto.
         /// </summary>
-        public string BarCode { get; set; }
-
-        /// <summary>
-        /// Código interno do produto (opcional).
-        /// </summary>
-        public string? InternCode { get; set; }
+        public string Brand { get; set; }
 
         /// <summary>
         /// Preço de venda do produto.
         /// </summary>
         public decimal Price { get; set; }
+
+
+        /// <summary>
+        /// Código interno do produto (opcional).
+        /// </summary>
+        public string? Code { get; set; }
+
+        /// <summary>
+        /// Quantidade disponível em estoqque do produto.
+        /// </summary>
+        public int Stock { get; set; }
+
+
 
     }
 }

@@ -2,6 +2,7 @@
 using Dietbox.ECommerce.Core.Interfaces;
 using Dietbox.ECommerce.Core.Services;
 using Dietbox.ECommerce.Core.Validations;
+using Dietbox.ECommerce.Tenant;
 using Dietbox.ECommerce.WebAPI.Configurations.Services;
 
 namespace Dietbox.ECommerce.WebAPI.Configurations
@@ -14,6 +15,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations
                 
             services.AddScoped<ICommandValidator, CommandValidator>();
             services.AddScoped<ISettings, AppSettings>();
+            services.AddScoped<ITenant, Dietbox.ECommerce.Core.Tenant>();
             services.AddScoped<GoogleRecaptcha>();
 
 
@@ -28,6 +30,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations
 
 
             services.RegisterServicesForCompanies();
+            services.RegisterServicesForProducts();
 
 
 

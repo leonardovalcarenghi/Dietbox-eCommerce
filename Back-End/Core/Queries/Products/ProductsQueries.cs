@@ -2,7 +2,7 @@
 using Dietbox.ECommerce.Core.Exceptions;
 using Dietbox.ECommerce.Core.Interfaces.Products;
 using Dietbox.ECommerce.Core.Mappers.Products;
-using Dietbox.ECommerce.ORM.Entities.Companies;
+using Dietbox.ECommerce.ORM.Entities.Products;
 using Dietbox.ECommerce.ORM.Interfaces;
 using Dietbox.ECommerce.Tenant;
 using Microsoft.EntityFrameworkCore;

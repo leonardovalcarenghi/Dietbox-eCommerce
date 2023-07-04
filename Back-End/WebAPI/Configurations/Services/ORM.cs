@@ -2,6 +2,7 @@
 using Dietbox.ECommerce.ORM;
 using Dietbox.ECommerce.ORM.Contexts;
 using Dietbox.ECommerce.ORM.Entities.Companies;
+using Dietbox.ECommerce.ORM.Entities.Products;
 using Dietbox.ECommerce.ORM.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dietbox.ECommerce.ORM.Entities.Companies
+namespace Dietbox.ECommerce.ORM.Entities.Products
 {
 
     [Table("Products", Schema = "company")]
