@@ -31,6 +31,7 @@ namespace Dietbox.ECommerce.Core.Mappers.Customers
                     .AfterMap((source, dest) =>
                     {
                         dest.Password = dest.Password.ToHash256();
+                        dest.Active = true;
                     });
         }
 

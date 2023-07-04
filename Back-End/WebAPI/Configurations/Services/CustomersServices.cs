@@ -1,10 +1,6 @@
-﻿using Dietbox.ECommerce.Core.Handlers.Companies;
-using Dietbox.ECommerce.Core.Handlers.Customers;
-using Dietbox.ECommerce.Core.Interfaces.Companies;
+﻿using Dietbox.ECommerce.Core.Handlers.Customers;
 using Dietbox.ECommerce.Core.Interfaces.Customers;
-using Dietbox.ECommerce.Core.Mappers.Companies;
 using Dietbox.ECommerce.Core.Mappers.Customers;
-using Dietbox.ECommerce.Core.Validations.Companies;
 using Dietbox.ECommerce.Core.Validations.Customers;
 
 namespace Dietbox.ECommerce.WebAPI.Configurations.Services

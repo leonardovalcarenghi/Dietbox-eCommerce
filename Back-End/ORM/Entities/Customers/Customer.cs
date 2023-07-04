@@ -30,22 +30,6 @@ namespace Dietbox.ECommerce.ORM.Entities.Users
         public string Name { get; set; }
 
         /// <summary>
-        /// Data de nascimento do cliente.
-        /// </summary>
-        [Required]
-        [Column("Birthdate")]
-        public DateTime Birthdate { get; set; }
-
-        /// <summary>
-        /// CPF do cliente.
-        /// </summary>
-        [Required]
-        [Column("CPF")]
-        [MaxLength(14)]
-        public string CPF { get; set; }
-
-
-        /// <summary>
         /// E-mail do cliente.
         /// </summary>
         [Required]
@@ -58,7 +42,7 @@ namespace Dietbox.ECommerce.ORM.Entities.Users
         /// </summary>
         [Required]
         [Column("Password")]
-        [MaxLength(50)]
+        [MaxLength(64)]
         public string Password { get; set; }
 
         /// <summary>
