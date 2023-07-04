@@ -30,6 +30,7 @@ export default function LoginPage({ setIsAuth }) {
             const result = await Post(loginAs == 1 ? "/customers/login" : "/companies/login");
             const { authorization } = result;
             localStorage["authorization"] = authorization;
+            localStorage["loginAs"] = loginAs;
             window.location.href = "/"; // Ir para ínicio.
         }
         catch (error) {

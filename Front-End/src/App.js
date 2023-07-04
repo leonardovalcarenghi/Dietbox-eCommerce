@@ -14,18 +14,26 @@ import CatalogPage from "./Pages/Catalog";
 // Componentes:
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
+import Error404Page from "./Pages/Error404";
+import NewProductPage from "./Pages/NewProduct";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage["authorization"]);
+  const [isCompany, setIsCompany] = useState(localStorage["loginAs"] == 2);
 
   const PrivateRoutes = createBrowserRouter([
     {
       path: "/",
       element: <CatalogPage />,
+      errorElement: <Error404Page />,
     },
     {
       path: "produto/:productID",
       element: <ViewProductPage />,
+    },
+    {
+      path: "produtos/cadastro",
+      element: <NewProductPage />,
     },
   ]);
 
@@ -33,6 +41,7 @@ export default function App() {
     {
       path: "/",
       element: <WelcomePage />,
+      errorElement: <Error404Page />,
     },
     {
       path: "criar-conta",
@@ -46,7 +55,7 @@ export default function App() {
 
   return (
     <>
-      {isAuth && <NavBar />}
+      {isAuth && <NavBar isCompany={isCompany} />}
 
       <div className="p-5">
         <RouterProvider router={isAuth ? PrivateRoutes : PublicRoutes} />
