@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import Product from "../Components/Product";
+import { Get } from "../Request";
 
 export default function CatalogPage() {
 
-    const [products, setProducts] = useState([]);
+    const productLoading = { loading: true }
+    const [products, setProducts] = useState([productLoading, productLoading, productLoading]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
 
-        setProducts([produto01, produto02, produto03]);
+        GetProducts();
 
     }, [])
 
@@ -15,7 +18,16 @@ export default function CatalogPage() {
      * Obter produtos.
      */
     async function GetProducts() {
-        /* back end tem q saber se auth é de cliente ou de empresa para seguir a regra solicitada. */
+        try {
+
+            const result = await Get("/products");
+            const list = Array.isArray(result) ? result : [];
+            setProducts(list);
+
+        } catch (error) {
+            console.error("> FALHA AO BUSCAR LISTA DE PRODUTOS", error);
+            setError(error);
+        }
     }
 
     /**
@@ -25,45 +37,24 @@ export default function CatalogPage() {
 
     }
 
-
-    const produto01 = {
-        id: 1,
-        name: "Produto 01",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue.",
-        active: true,
-        stock: 8,
-        price: 989.87,
-        active: true,
-        loading: true
-    };
-
-    const produto02 = {
-        id: 2,
-        name: "Produto 02",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue.",
-        active: true,
-        stock: 2,
-        price: 1407.97,
-        active: true,
-    };
-
-    const produto03 = {
-        id: 3,
-        name: "Produto 03",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue.",
-        active: true,
-        stock: 0,
-        price: 452.77,
-        active: true,
-    };
-
     return (
         <>
             <div className="container-fluid p-5">
                 <div className="row">
+
+                    {
+                        error &&
+                        <>
+                            <div class="alert alert-danger" role="alert">
+                                <ul className="mb-0">
+                                    {
+                                        error.messages.map((message) => <li>{message}</li>)
+                                    }
+                                </ul>
+                            </div>
+                        </>
+                    }
+
                     {
                         products.map((product) =>
                             <>

@@ -65,7 +65,14 @@ export default function Product(props) {
                                 </div>
 
 
-                                <p className="card-text mt-3">{description}</p>
+                                <p className="card-text mt-3" style={{
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    height: 30,
+                                    whiteSpace: "nowrap"
+                                }}>
+                                    {description}
+                                </p>
                                 <p className="card-text">
                                     <small className="text-muted">
                                         {stock || 0} unidades disponíveis.

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DecimalToMoney } from "../Utils";
+import { Get } from "../Request";
 
 export default function ViewProductPage() {
 
@@ -24,7 +25,13 @@ export default function ViewProductPage() {
      */
     async function GetProduct() {
 
-        // const result = await Get(`/products/${productID}`);
+        try {
+            const result = await Get(`/products/${productID}`);
+            setProduct(result);
+        }
+        catch (error) {
+            console.error("> FALHA AO BUSCAR PRODUTO", error);
+        }
 
     }
 
@@ -119,14 +126,14 @@ export default function ViewProductPage() {
                                 {
                                     stock == 0 || !active ?
                                         <>
-                                            <button className="btn btn-outline-secondary" style={{ width: "100%" }}>
+                                            <button className="btn btn-outline-secondary" style={{ width: "100%" }} onClick={() => { alert("Funcionalidade indisponível.") }}>
                                                 <i class="bi bi-send me-2"></i>
                                                 Avise-me quando chegar
                                             </button>
                                         </>
                                         :
                                         <>
-                                            <button className="btn btn-primary" style={{ width: "100%" }}>
+                                            <button className="btn btn-primary" style={{ width: "100%" }} onClick={() => { alert("Funcionalidade indisponível.") }}>
                                                 <i className="bi bi-cart-plus-fill me-2"></i>
                                                 Adicionar ao Carrinho
                                             </button>
@@ -139,6 +146,17 @@ export default function ViewProductPage() {
 
                                         </>
                                 }
+
+
+                                <button
+                                    className="btn btn-outline-secondary mt-2"
+                                    type="button"
+                                    style={{ width: "100%" }}
+                                    onClick={() => window.location.href = "/"}
+                                    disabled={loading}>
+                                    <i class="bi bi-arrow-left me-2"></i>
+                                    Voltar
+                                </button>
                             </div>
 
 
