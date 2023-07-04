@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Dietbox.ECommerce.WebAPI.Configurations.Services
 {
-    public static class JWTConfigurations
+    public static class JsonWebTokenServices
     {
-        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration, bool isDevelopment = false)
+        public static void AddJWT(this IServiceCollection services, IConfiguration configuration, bool isDevelopment = false)
         {
 
             string? key = configuration.GetSection("JsonWebToken:Key").Value;

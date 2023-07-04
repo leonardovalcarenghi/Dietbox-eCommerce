@@ -11,7 +11,7 @@ using System.Runtime;
 namespace Dietbox.ECommerce.WebAPI.Configurations.Services
 {
 
-    public static class ORMConfigurations
+    public static class ORMServices
     {
         public static void RegisterServicesForORM(this IServiceCollection services, IConfiguration configuration)
         {

@@ -7,7 +7,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
     public static class SwaggerServices
     {
 
-        public static void AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static void AddSwagger(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddSwaggerGen(config =>
             {
