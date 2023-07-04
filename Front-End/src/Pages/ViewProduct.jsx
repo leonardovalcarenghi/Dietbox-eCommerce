@@ -51,221 +51,243 @@ export default function ViewProductPage() {
     }
 
     return (
-        <>
+        error
+            ?
+            <>
+                <div className={"container pt-5"}>
+                    <div className="row justify-content-center">
+                        <div className="col-10">
+                            <div className="p-2">
+                                <div className="display-6 mb-0 pb-0">Ocorreu um problema ao buscar o produto.</div>
+                                <ul className="p-3 pl-5">
+                                    {error.messages.map(message => <li>{message}</li>)}
+                                </ul>
 
-
-
-            <div className={"container pt-5 " + (loading && "placeholder-wave")}>
-                <div className="row justify-content-center">
-
-                    {/* Imagem */}
-                    <div className="col-5">
-
-                        <div id="carouselExample" className="carousel slide carousel-fade carousel-dark">
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img src="https://placehold.co/550x400" className="img-fluid rounded" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="https://placehold.co/550x400/orange/white" className="img-fluid rounded" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="https://placehold.co/550x400/blue/white" className="img-fluid rounded" alt="..." />
-                                </div>
+                                <button className="btn btn-outline-secondary" onClick={() => GetProduct()}>
+                                    <i class="bi bi-arrow-clockwise me-2"></i>
+                                    Tentar Novamente
+                                </button>
                             </div>
-                            <button
-                                className="carousel-control-prev"
-                                type="button"
-                                data-bs-target="#carouselExample"
-                                data-bs-slide="prev"
-                            >
-                                <span className="carousel-control-prev-icon" aria-hidden="true" />
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button
-                                className="carousel-control-next"
-                                type="button"
-                                data-bs-target="#carouselExample"
-                                data-bs-slide="next"
-                            >
-                                <span className="carousel-control-next-icon" aria-hidden="true" />
-                                <span className="visually-hidden">Next</span>
-                            </button>
                         </div>
-
-
                     </div>
-
-                    {/* Informações */}
-                    <div className="col-6">
-
-                        <div>
-                            {
-                                loading ?
-                                    <>
-                                        <span class="placeholder col-8"></span>
-                                        <span class="placeholder placeholder-xs col-3 d-block mt-2"></span>
-                                    </>
-                                    :
-                                    <>
-                                        <h3 className="pb-0 mb-0">{name || "Lorem ipsum dolor sit amet."}</h3>
-                                        <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
-                                    </>
-                            }
-                        </div>
-
-                        <div className="mt-3">
-                            {
-                                loading ?
-                                    <>
-                                        <span class="placeholder placeholder-xs col-2 d-block" ></span>
-                                        <span class="placeholder col-10 mt-1" style={{ minHeight: "7rem" }}></span>
-                                    </>
-                                    :
-                                    <>
-                                        <label class="produto-details-label">Descrição</label>
-                                        <p>{description || FAKE_DESCRIPTION}</p>
-                                    </>
-                            }
-
-                        </div>
+                </div>
+            </>
+            :
+            <>
 
 
 
+                <div className={"container pt-5 " + (loading && "placeholder-wave")}>
+                    <div className="row justify-content-center">
 
-                        <div className="mt-3">
-                            {
-                                loading ?
-                                    <>
+                        {/* Imagem */}
+                        <div className="col-5">
 
-                                        <span class="placeholder col-4 mt-1" style={{ minHeight: "2rem" }}></span>
-                                        <span class="placeholder placeholder-xs col-3 d-block mt-1" ></span>
-                                    </>
-                                    :
-                                    <>
-                                        <h2>
-                                            <span>
-                                                R$ {price ? DecimalToMoney(price) : "0,00"}
-                                            </span>
-                                            <small className="d-block text-muted small" style={{ fontSize: "12.8px" }}>
-                                                10x R$ {price ? DecimalToMoney(price / 10) : "0,00"} sem juros.
-                                            </small>
-                                        </h2>
-                                    </>
-                            }
-
-                        </div>
-
-                        <div className="mt-3">
-                            {
-                                loading ?
-                                    <>
-                                        <span class="placeholder placeholder-xs col-2 d-block"></span>
-                                        <span class="placeholder col-5 mt-1 mb-2" ></span>
-                                    </>
-                                    :
-                                    <>
-                                        <label class="produto-details-label">Disponibilidade</label>
-                                        {
-                                            stock == 0 ? <p>Produto indisponível.</p> : <p>{stock} unidades disponíveis.</p>
-                                        }
-                                    </>
-                            }
-
-
-                        </div>
-
-                        <div className="row">
-
-                            <div className="col-12">
-                                {
-                                    stock == 0 || !active ?
-                                        <>
-                                            <button
-                                                className="btn btn-outline-secondary"
-                                                style={{ width: "100%" }}
-                                                onClick={() => { alert("Funcionalidade indisponível.") }}
-                                                disabled={loading}
-                                            >
-                                                <i class="bi bi-send me-2"></i>
-                                                Avise-me quando chegar
-                                            </button>
-                                        </>
-                                        :
-                                        <>
-                                            <button
-                                                className={"btn btn-primary " + (loading && "placeholder ")}
-                                                style={{ width: "100%" }}
-                                                onClick={() => { alert("Funcionalidade indisponível.") }}
-                                                disabled={loading}
-                                            >
-                                                {
-                                                    !loading &&
-                                                    <>
-                                                        <i className="bi bi-cart-plus-fill me-2"></i>
-                                                        Adicionar ao Carrinho
-                                                    </>
-                                                }
-                                            </button>
-
-                                            <button
-                                                className={"btn btn-success mt-2 " + (loading && "placeholder")}
-                                                style={{ width: "100%" }}
-                                                disabled={loading}
-                                            >
-                                                {
-                                                    !loading &&
-                                                    <>
-                                                        <i className="bi bi-bag-fill me-2"></i>
-                                                        Comprar Agora
-                                                    </>
-                                                }
-                                            </button>
-
-
-                                        </>
-                                }
-
-
+                            <div id="carouselExample" className="carousel slide carousel-fade carousel-dark">
+                                <div className="carousel-inner">
+                                    <div className="carousel-item active">
+                                        <img src="https://placehold.co/550x400" className="img-fluid rounded" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                        <img src="https://placehold.co/550x400/orange/white" className="img-fluid rounded" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                        <img src="https://placehold.co/550x400/blue/white" className="img-fluid rounded" alt="..." />
+                                    </div>
+                                </div>
                                 <button
-                                    className={"btn btn-outline-secondary mt-2 " + (loading && "placeholder")}
+                                    className="carousel-control-prev"
                                     type="button"
-                                    style={{ width: "100%" }}
-                                    onClick={() => window.location.href = "/"}
-                                    disabled={loading}>
-                                    {
-                                        !loading &&
-                                        <>
-                                            <i class="bi bi-arrow-left me-2"></i>
-                                            Voltar
-                                        </>
-                                    }
+                                    data-bs-target="#carouselExample"
+                                    data-bs-slide="prev"
+                                >
+                                    <span className="carousel-control-prev-icon" aria-hidden="true" />
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button
+                                    className="carousel-control-next"
+                                    type="button"
+                                    data-bs-target="#carouselExample"
+                                    data-bs-slide="next"
+                                >
+                                    <span className="carousel-control-next-icon" aria-hidden="true" />
+                                    <span className="visually-hidden">Next</span>
                                 </button>
                             </div>
 
 
-
-
-                            <div className="col-12 mt-2">
-
-                            </div>
                         </div>
 
+                        {/* Informações */}
+                        <div className="col-6">
 
-                        {/* <button href="#" className="btn btn-primary " disabled={!active} >
+                            <div>
+                                {
+                                    loading ?
+                                        <>
+                                            <span class="placeholder col-8"></span>
+                                            <span class="placeholder placeholder-xs col-3 d-block mt-2"></span>
+                                        </>
+                                        :
+                                        <>
+                                            <h3 className="pb-0 mb-0">{name || "Lorem ipsum dolor sit amet."}</h3>
+                                            <small className="text-muted text-uppercase">{brand || "Lorem ipsum"}</small>
+                                        </>
+                                }
+                            </div>
+
+                            <div className="mt-3">
+                                {
+                                    loading ?
+                                        <>
+                                            <span class="placeholder placeholder-xs col-2 d-block" ></span>
+                                            <span class="placeholder col-10 mt-1" style={{ minHeight: "7rem" }}></span>
+                                        </>
+                                        :
+                                        <>
+                                            <label class="produto-details-label">Descrição</label>
+                                            <p>{description || FAKE_DESCRIPTION}</p>
+                                        </>
+                                }
+
+                            </div>
+
+
+
+
+                            <div className="mt-3">
+                                {
+                                    loading ?
+                                        <>
+
+                                            <span class="placeholder col-4 mt-1" style={{ minHeight: "2rem" }}></span>
+                                            <span class="placeholder placeholder-xs col-3 d-block mt-1" ></span>
+                                        </>
+                                        :
+                                        <>
+                                            <h2>
+                                                <span>
+                                                    R$ {price ? DecimalToMoney(price) : "0,00"}
+                                                </span>
+                                                <small className="d-block text-muted small" style={{ fontSize: "12.8px" }}>
+                                                    10x R$ {price ? DecimalToMoney(price / 10) : "0,00"} sem juros.
+                                                </small>
+                                            </h2>
+                                        </>
+                                }
+
+                            </div>
+
+                            <div className="mt-3">
+                                {
+                                    loading ?
+                                        <>
+                                            <span class="placeholder placeholder-xs col-2 d-block"></span>
+                                            <span class="placeholder col-5 mt-1 mb-2" ></span>
+                                        </>
+                                        :
+                                        <>
+                                            <label class="produto-details-label">Disponibilidade</label>
+                                            {
+                                                stock == 0 ? <p>Produto indisponível.</p> : <p>{stock} unidades disponíveis.</p>
+                                            }
+                                        </>
+                                }
+
+
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col-12">
+                                    {
+                                        stock == 0 || !active ?
+                                            <>
+                                                <button
+                                                    className="btn btn-outline-secondary"
+                                                    style={{ width: "100%" }}
+                                                    onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                    disabled={loading}
+                                                >
+                                                    <i class="bi bi-send me-2"></i>
+                                                    Avise-me quando chegar
+                                                </button>
+                                            </>
+                                            :
+                                            <>
+                                                <button
+                                                    className={"btn btn-primary " + (loading && "placeholder ")}
+                                                    style={{ width: "100%" }}
+                                                    onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                    disabled={loading}
+                                                >
+                                                    {
+                                                        !loading &&
+                                                        <>
+                                                            <i className="bi bi-cart-plus-fill me-2"></i>
+                                                            Adicionar ao Carrinho
+                                                        </>
+                                                    }
+                                                </button>
+
+                                                <button
+                                                    className={"btn btn-success mt-2 " + (loading && "placeholder")}
+                                                    style={{ width: "100%" }}
+                                                    disabled={loading}
+                                                >
+                                                    {
+                                                        !loading &&
+                                                        <>
+                                                            <i className="bi bi-bag-fill me-2"></i>
+                                                            Comprar Agora
+                                                        </>
+                                                    }
+                                                </button>
+
+
+                                            </>
+                                    }
+
+
+                                    <button
+                                        className={"btn btn-outline-secondary mt-2 " + (loading && "placeholder")}
+                                        type="button"
+                                        style={{ width: "100%" }}
+                                        onClick={() => window.location.href = "/"}
+                                        disabled={loading}>
+                                        {
+                                            !loading &&
+                                            <>
+                                                <i class="bi bi-arrow-left me-2"></i>
+                                                Voltar
+                                            </>
+                                        }
+                                    </button>
+                                </div>
+
+
+
+
+                                <div className="col-12 mt-2">
+
+                                </div>
+                            </div>
+
+
+                            {/* <button href="#" className="btn btn-primary " disabled={!active} >
                             <i className="bi bi-box-arrow-up-right me-2"></i>
                             Detalhes
                         </button> */}
 
 
+                        </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
 
 
 
-        </>
+            </>
     );
 }
