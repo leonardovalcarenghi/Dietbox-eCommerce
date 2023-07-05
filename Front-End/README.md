@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Dietbox e-Commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tecnologias
 
-## Available Scripts
+### **Back-End**
+- Microsoft .NET 6
+- Entity Framework Core
+- AutoMapper
+- JWT
+- Cache
 
-In the project directory, you can run:
+### **Front-End**
+- React
+- React Router DOM
+- Bootstrap 5.3
+
+### **DataBase**
+- SQL Server Express
+
+<br>
+
+## Configuração
+
+### **Configurações do Back-End**
+1. Abra o projeto no Visual Studio.
+2. Instale as dependências do NuGet (se necessárias).
+3. Configure a solução para inicializar somente o projeto de **API**.
+4. Execute!
+
+> **LOCALHOST**
+> <br>
+> Certifique-se de que o back-end esteja rodando na porta **3333**.
+> <br>
+> _Essa é a porta que o front-end está configurado._
+
+
+
+
+<br>
+
+### **Configuração do Front-End**
+
+### `npm install`
+Execute esse comando para instalar todas as dependências do React.
 
 ### `npm start`
+Após as depedências terem sido instaladas, execute o comando `npm start` para iniciar o servidor node local do front-end.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Projeto
 
-### `npm test`
+## Tela de Boas-Vindas
+Ao iniciar o **Front-End**, você vai se deparar com a tela de boas vindas.
+<br>
+Nela contém duas ações, **Fazer Login** ou **Criar Conta**.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Tela de Inicio](/readme-images/print-tela-inicio.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tela de Cadastro
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Na tela de **cadastro** você tem a opção de criar uma conta como **cliente** ou **empresa**.
 
-### `npm run eject`
+![Tela de Login](/readme-images/print-tela-cadastro.PNG)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Tela de Login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Na tela de login você tem a opção de acessar o sistema como **Cliente** ou **Empresa**.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Tela de Login](/readme-images/print-tela-login.PNG)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Tela de Início
+A tela de início (depois de autenticado) é a tela que vai exibir os produtos cadastrados, porém dependendo do tipo de _entidade_ logada, a tela tem um padrão diferente.
 
-### Advanced Configuration
+Autenticado como **cliente** a _NavBar_ fica da cor azul e o botão de "comprar" fica disponível.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Tela de Inicio (Cliente)](/readme-images/print-tela-produtos-como-cliente.PNG)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+Autenticado como **empresa** a _NavBar_ fica da cor verde e o botão de "comprar" não é mostrado.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Note também que como **empresa** surge uma opção de "cadastrar produto".
+
+![Tela de Inicio (Empresa)](/readme-images/print-tela-produtos-como-empresa.PNG)
+
+
