@@ -207,7 +207,7 @@ export default function ViewProductPage(props) {
                                                 <button
                                                     className="btn btn-outline-secondary"
                                                     style={{ width: "100%" }}
-                                                    onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                    onClick={() => { alert("Não Implementado;") }}
                                                     disabled={loading}
                                                 >
                                                     <i class="bi bi-send me-2"></i>
@@ -224,7 +224,7 @@ export default function ViewProductPage(props) {
                                                         <button
                                                             className={"btn btn-primary " + (loading && "placeholder ")}
                                                             style={{ width: "100%" }}
-                                                            onClick={() => { alert("Funcionalidade indisponível.") }}
+                                                            onClick={() => { alert("Não Implementado;") }}
                                                             disabled={loading}
                                                         >
                                                             {

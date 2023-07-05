@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Product from "../Components/Product";
-
+import "./../WelcomeEffect.css"
 export default function WelcomePage() {
 
 
@@ -11,7 +11,40 @@ export default function WelcomePage() {
     return (
         <>
 
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+            <div className="particle" />
+
             <div className="d-flex align-items-center" style={{ height: "90vh" }}>
+
+
 
                 <div style={{ width: "100%" }}>
                     <h1 className="display-4">
