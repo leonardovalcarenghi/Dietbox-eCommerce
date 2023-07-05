@@ -28,6 +28,7 @@ export default function CatalogPage(props) {
         } catch (error) {
             console.error("> FALHA AO BUSCAR LISTA DE PRODUTOS", error);
             setError(error);
+            setProducts([])
         }
     }
 

@@ -5,6 +5,7 @@ import { Post } from "../Request";
 export default function LoginPage({ setIsAuth }) {
 
     const [createAccountSuccess, setCreateAccountSuccess] = useState(!!(sessionStorage["createAccountSuccess"]));
+    const [authorizationExpired, setAuthorizationExpired] = useState(!!(sessionStorage["authorizationExpired"]))
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -15,12 +16,9 @@ export default function LoginPage({ setIsAuth }) {
     const [emailMessage, setEmailMessage] = useState("");
     const [passwordMessage, setPasswordMessage] = useState("");
 
-    useEffect(() => {
-
-        delete sessionStorage["createAccountSuccess"];
-
-    }, [createAccountSuccess])
-
+    
+    useEffect(() => { delete sessionStorage["createAccountSuccess"]; }, [createAccountSuccess]);
+    useEffect(() => { delete sessionStorage["authorizationExpired"]; }, [authorizationExpired]);
 
     /**
      * Realizar login do usuário.
@@ -82,7 +80,7 @@ export default function LoginPage({ setIsAuth }) {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-6">
-                        <div className="card" >
+                        <div className="card">
 
                             <div className="card-body">
                                 <h5 className="card-title display-6">Login</h5>
@@ -155,6 +153,15 @@ export default function LoginPage({ setIsAuth }) {
                                     <>
                                         <div class="alert bg-success text-white" role="alert">
                                             Sua conta foi criada com êxito!
+                                        </div>
+                                    </>
+                                }
+
+                                {
+                                    authorizationExpired &&
+                                    <>
+                                        <div class="alert bg-warning text-white" role="alert">
+                                            Sua sessão expirou, por favor, faça login novamente.
                                         </div>
                                     </>
                                 }

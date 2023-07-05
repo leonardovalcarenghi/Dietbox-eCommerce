@@ -20,7 +20,7 @@ export default function NavBar(props) {
             <nav className={"navbar navbar-expand-lg  navbar-dark " + (isCompany ? "bg-success" : "bg-primary")}>
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
-                        Dietbox e-Commerce
+                        Dietbox e-Commerce {isCompany && <small>( Admin )</small>}
                     </a>
                     <button
                         className="navbar-toggler"

@@ -3,7 +3,9 @@ import { Enviroment } from "./Enviroment";
 import { IsJSON } from "./Utils";
 
 const SUCCESSFUL_RESPONSES_STATUS_CODES = [200, 201, 202, 204];
-const CLIENT_ERROR_RESPONSES_STATUS_CODES = [400, 403, 404, 405, 406, 408, 409, 411, 413, 414, 415, 429];
+const CLIENT_ERROR_RESPONSES_STATUS_CODES = [
+  400, 403, 404, 405, 406, 408, 409, 411, 413, 414, 415, 429,
+];
 
 const AvailableMethods = [
   "GET",
@@ -78,14 +80,12 @@ async function CreateHttpRequest(method = "", url = "", parameters) {
   }
 
   const api = API_URL[Enviroment] + url;
-  const authorization = localStorage["authorization"]
+  const authorization = localStorage["authorization"];
   const httpRequest = new XMLHttpRequest();
 
   const request = await new Promise((resolve) => {
     httpRequest.onreadystatechange = (event) => {
-
       if (httpRequest.readyState == httpRequest.DONE) {
-
         const { status, responseText } = httpRequest;
         const response = IsJSON(responseText) ? JSON.parse(responseText) : {};
 
@@ -98,7 +98,11 @@ async function CreateHttpRequest(method = "", url = "", parameters) {
           });
         }
 
-        if (status == 401) { window.location.href = "/login"; }
+        if (status == 401) {
+          delete localStorage["authorization"];
+          sessionStorage["authorizationExpired"] = "authorizationExpired";
+          window.location.href = "/login";
+        }
 
         if (SUCCESSFUL_RESPONSES_STATUS_CODES.includes(status)) {
           return resolve({ error: false, status, ...response });
@@ -109,7 +113,6 @@ async function CreateHttpRequest(method = "", url = "", parameters) {
         }
 
         resolve({ status, ...response });
-
       }
     };
 
