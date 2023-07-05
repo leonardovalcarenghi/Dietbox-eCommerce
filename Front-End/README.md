@@ -55,7 +55,7 @@ Ao iniciar o **Front-End**, você vai se deparar com a tela de boas vindas.
 <br>
 Nela contém duas ações, **Fazer Login** ou **Criar Conta**.
 
-![Tela de Inicio](/readme-images/print-tela-inicio.png)
+![Tela de Inicio](./readme-images/print-tela-inicio.png)
 
 
 
@@ -63,7 +63,7 @@ Nela contém duas ações, **Fazer Login** ou **Criar Conta**.
 
 Na tela de **cadastro** você tem a opção de criar uma conta como **cliente** ou **empresa**.
 
-![Tela de Login](/readme-images/print-tela-cadastro.PNG)
+![Tela de Login](./readme-images/print-tela-cadastro.PNG)
 
 
 
@@ -73,7 +73,7 @@ Na tela de **cadastro** você tem a opção de criar uma conta como **cliente** 
 
 Na tela de login você tem a opção de acessar o sistema como **Cliente** ou **Empresa**.
 
-![Tela de Login](/readme-images/print-tela-login.PNG)
+![Tela de Login](./readme-images/print-tela-login.PNG)
 
 
 
@@ -85,7 +85,7 @@ A tela de início (depois de autenticado) é a tela que vai exibir os produtos c
 
 Autenticado como **cliente** a _NavBar_ fica da cor azul e o botão de "comprar" fica disponível.
 
-![Tela de Inicio (Cliente)](/readme-images/print-tela-produtos-como-cliente.PNG)
+![Tela de Inicio (Cliente)](./readme-images/print-tela-produtos-como-cliente.PNG)
 
 
 
@@ -93,6 +93,6 @@ Autenticado como **empresa** a _NavBar_ fica da cor verde e o botão de "comprar
 
 Note também que como **empresa** surge uma opção de "cadastrar produto".
 
-![Tela de Inicio (Empresa)](/readme-images/print-tela-produtos-como-empresa.PNG)
+![Tela de Inicio (Empresa)](./readme-images/print-tela-produtos-como-empresa.PNG)
 
 
