@@ -41,6 +41,7 @@ namespace Dietbox.ECommerce.Core.Mappers.Products
                     .AfterMap((source, dest) =>
                     {
                         dest.CompanyID = _tenant.ID;
+                        dest.Active = true;
                     });
         }
 

@@ -17,7 +17,7 @@ namespace Dietbox.ECommerce.Core.Validations.Products
         private readonly List<string> _messages;
 
         private const int _NAME_MAX_LENGTH = 100;
-        private const int _DESCRIPTION_MAX_LENGTH = 200;
+        private const int _DESCRIPTION_MAX_LENGTH = 400;
         private const int _BRAND_MAX_LENGTH = 50;
         private const int _CODE_MAX_LENGTH = 50;
 
@@ -84,7 +84,7 @@ namespace Dietbox.ECommerce.Core.Validations.Products
 
             #region Preço do Produto
 
-            if (command.Price is > 0)
+            if (command.Price is < 0)
                 _messages.Add("O valor do produto não pode ser inferior à 0 (zero).");  
             
             if (command.Price is 0)
@@ -108,7 +108,7 @@ namespace Dietbox.ECommerce.Core.Validations.Products
 
             #region Estoque do Produto
 
-            if (command.Stock is > 0)
+            if (command.Stock is < 0)
                 _messages.Add("O estoque do produto não pode ser inferior à 0 (zero).");
 
             if (command.Stock is 0)
