@@ -115,8 +115,8 @@ namespace Dietbox.ECommerce.Core.Validations.Products
             if (command.Stock is < 0)
                 _messages.Add("O estoque do produto não pode ser inferior à 0 (zero).");
 
-            if (command.Stock is 0)
-                _messages.Add("O estoque do produto não pode ser igual à 0 (zero).");
+            //if (command.Stock is 0)
+            //    _messages.Add("O estoque do produto não pode ser igual à 0 (zero).");
 
             #endregion
 

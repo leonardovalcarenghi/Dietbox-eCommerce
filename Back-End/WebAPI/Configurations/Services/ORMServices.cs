@@ -18,7 +18,13 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
         {
             services.AddSingleton(x => services.GetType().Assembly);
             //services.UseBasicContextTo("Server=localhost\\SQLEXPRESS; Database=master; Trusted_Connection=True;");
-            services.UseBasicContextTo("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Leonardo\\Desktop\\Dietbox-eCommerce\\Back-End\\Core\\DataBase.mdf;Integrated Security=True");
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string directory = Directory.GetParent(currentDirectory).FullName + "\\Core";
+            string attachDbFilename = directory + "\\DataBase.mdf";
+
+            services.UseBasicContextTo($"Data Source=(LocalDB)\\MSSQLLocalDB; AttachDbFilename={attachDbFilename}; Integrated Security=True");
+            //services.UseBasicContextTo("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Leonardo\\Desktop\\Dietbox-eCommerce\\Back-End\\Core\\DataBase.mdf;Integrated Security=True");
             services.UseAllConfigurations();
 
             // Entidades:
