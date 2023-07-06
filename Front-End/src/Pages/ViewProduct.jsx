@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DecimalToMoney } from "../Utils";
-import { Get } from "../Request";
+import { Get, Post } from "../Request";
 
 export default function ViewProductPage(props) {
 
@@ -10,7 +10,9 @@ export default function ViewProductPage(props) {
     const [product, setProduct] = useState(null);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
+    const [buyError, setBuyError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [buyLoading, setBuyLoading] = useState(false);
     const { name, description, brand, price, stock, active } = product || { stock: 1, active: true };
 
     const FAKE_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat lacinia dolor. Aenean elementum dignissim fringilla. Pellentesque vulputate, diam sed maximus pulvinar, lorem magna tristique nulla, ut pretium est dui vel mi. Etiam ex nunc, tristique vitae felis id, porta lobortis odio. Sed viverra commodo ex, eget commodo lorem aliquam.";
@@ -49,6 +51,24 @@ export default function ViewProductPage(props) {
      */
     async function BuyProduct() {
 
+        const amount = prompt(`Quantas unidades do produto '${name}' você quer comprar?`, 1);
+        if (!amount) { return }
+
+        setBuyLoading(true);
+        setBuyError(null);
+
+        try {
+            await Post(`/products/${productID}/buy`, { amount });
+            alert(`COMPRA EFETUADA\nVocê comprou ${amount} unidades(s) do produto '${name}' com êxito.\nParabéns!`);
+            setBuyLoading(false);
+            GetProduct();        
+        }
+        catch (error) {
+            console.error("> FALHA AO COMPRAR PRODUTO", error);
+            setBuyError(error);
+            setBuyLoading(false);
+        }
+        
     }
 
     return (
@@ -59,7 +79,7 @@ export default function ViewProductPage(props) {
                     <div className="row justify-content-center">
                         <div className="col-10">
                             <div className="p-2">
-                                <div className="display-6 mb-0 pb-0">Ocorreu um problema ao buscar o produto.</div>
+                                <div className="display-6 mb-0 pb-0">Ocorreu um problema.</div>
                                 <ul className="p-3 pl-5">
                                     {error.messages.map(message => <li>{message}</li>)}
                                 </ul>
@@ -198,6 +218,20 @@ export default function ViewProductPage(props) {
 
                             </div>
 
+
+                            {
+                                buyError &&
+                                <>
+                                    <div class="alert alert-danger" role="alert">
+                                        <ul className="mb-0">
+                                            {
+                                                buyError.messages.map((message) => <li>{message}</li>)
+                                            }
+                                        </ul>
+                                    </div>
+                                </>
+                            }
+
                             <div className="row">
 
                                 <div className="col-12">
@@ -208,7 +242,7 @@ export default function ViewProductPage(props) {
                                                     className="btn btn-outline-secondary"
                                                     style={{ width: "100%" }}
                                                     onClick={() => { alert("Não Implementado;") }}
-                                                    disabled={loading}
+                                                    disabled={loading || buyLoading}
                                                 >
                                                     <i class="bi bi-send me-2"></i>
                                                     Avise-me quando chegar
@@ -225,7 +259,7 @@ export default function ViewProductPage(props) {
                                                             className={"btn btn-primary " + (loading && "placeholder ")}
                                                             style={{ width: "100%" }}
                                                             onClick={() => { alert("Não Implementado;") }}
-                                                            disabled={loading}
+                                                            disabled={loading || buyLoading}
                                                         >
                                                             {
                                                                 !loading &&
@@ -239,14 +273,21 @@ export default function ViewProductPage(props) {
                                                         <button
                                                             className={"btn btn-success mt-2 " + (loading && "placeholder")}
                                                             style={{ width: "100%" }}
-                                                            disabled={loading}
+                                                            disabled={loading || buyLoading}
+                                                            onClick={BuyProduct}
                                                         >
                                                             {
-                                                                !loading &&
-                                                                <>
-                                                                    <i className="bi bi-bag-fill me-2"></i>
-                                                                    Comprar Agora
-                                                                </>
+                                                                buyLoading ?
+                                                                    <>
+                                                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                                        Processando compra...
+                                                                    </>
+                                                                    :
+                                                                    !loading &&
+                                                                    <>
+                                                                        <i className="bi bi-bag-fill me-2"></i>
+                                                                        Comprar Agora
+                                                                    </>
                                                             }
                                                         </button>
                                                     </>
@@ -263,7 +304,7 @@ export default function ViewProductPage(props) {
                                         type="button"
                                         style={{ width: "100%" }}
                                         onClick={() => window.location.href = "/"}
-                                        disabled={loading}>
+                                        disabled={loading || buyLoading}>
                                         {
                                             !loading &&
                                             <>
