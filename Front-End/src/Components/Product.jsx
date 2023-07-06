@@ -3,7 +3,7 @@ import { DecimalToMoney } from "../Utils";
 
 export default function Product(props) {
 
-    const { isCompany } = props;
+    const { isCompany, BuyProduct, buyLoading, buyId } = props;
     const { id, name, description, brand = "", stock, price, active, loading } = props;
 
     return (
@@ -91,14 +91,26 @@ export default function Product(props) {
 
                                 {
                                     !isCompany &&
-                                    <button className="btn btn-success me-2" disabled={stock == 0 || !active}>
-                                        <i className="bi bi-bag-fill me-2"></i>
-                                        {stock == 0 ? "Indisponível" : "Comprar"}
+                                    <button className="btn btn-success me-2" disabled={stock == 0 || !active || buyLoading} onClick={() => BuyProduct(id, name)}>
+
+                                        {
+                                            buyId == id && buyLoading ?
+                                                <>
+                                                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                    Comprando...
+                                                </>
+                                                :
+                                                <>
+                                                    <i className="bi bi-bag-fill me-2"></i>
+                                                    {stock == 0 ? "Indisponível" : "Comprar"}
+                                                </>
+                                        }
+
                                     </button>
                                 }
 
 
-                                <button className="btn btn-primary " disabled={!active} onClick={() => window.location.href = `/produto/${id}`}>
+                                <button className="btn btn-primary " disabled={!active || buyLoading} onClick={() => window.location.href = `/produto/${id}`}>
                                     <i className="bi bi-box-arrow-up-right me-2"></i>
                                     Detalhes
                                 </button>
