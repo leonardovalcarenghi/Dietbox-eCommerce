@@ -16,7 +16,7 @@ export default function LoginPage({ setIsAuth }) {
     const [emailMessage, setEmailMessage] = useState("");
     const [passwordMessage, setPasswordMessage] = useState("");
 
-    
+
     useEffect(() => { delete sessionStorage["createAccountSuccess"]; }, [createAccountSuccess]);
     useEffect(() => { delete sessionStorage["authorizationExpired"]; }, [authorizationExpired]);
 
@@ -118,8 +118,11 @@ export default function LoginPage({ setIsAuth }) {
                                             type="email"
                                             value={email}
                                             onChange={({ target }) => setEmail(target.value)}
-                                            onKeyUp={() => setEmailMessage("")}
                                             disabled={loading}
+                                            onKeyUp={({ key }) => {
+                                                setEmailMessage("")
+                                                key === "Enter" ? document.getElementById("passwordInput").focus() : (() => { })();
+                                            }}
                                         />
                                         <div className="form-text">
                                             {emailMessage}
@@ -137,8 +140,11 @@ export default function LoginPage({ setIsAuth }) {
                                             type="password"
                                             value={password}
                                             onChange={({ target }) => setPassword(target.value)}
-                                            onKeyUp={() => setPasswordMessage("")}
                                             disabled={loading}
+                                            onKeyUp={({ key }) => {
+                                                setPasswordMessage("")
+                                                key === "Enter" ? Login() : (() => { })();
+                                            }}
                                         />
                                         <div className="form-text">
                                             {passwordMessage}

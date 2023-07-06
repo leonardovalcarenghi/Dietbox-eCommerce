@@ -133,7 +133,7 @@ export default function NewProductPage(props) {
                                             onChange={({ target }) => setDescription(target.value)}
                                             onKeyUp={() => setDescriptionMessage("")}
                                             disabled={loading}
-                                            placeholder={"Ex. Uma nova forma de interação no seu iPhone. Um recurso essencial de segurança projetado para salvar vidas. Câmera grande-angular inovadora de 48 MP. Tela duas vezes mais brilhante sob a luz do sol◊Consultar avisos legais. Tudo com a potência do chip para smartphone que é o máximo."}
+                                            placeholder={"Ex. Uma nova forma de interação no seu iPhone.\nUm recurso essencial de segurança projetado para salvar vidas.\nCâmera grande-angular inovadora de 48 MP.\nTela duas vezes mais brilhante sob a luz do sol◊. Tudo com a potência do chip para smartphone que é o máximo."}
                                         />
                                         <div className="form-text">
                                             {descriptionMessage}
