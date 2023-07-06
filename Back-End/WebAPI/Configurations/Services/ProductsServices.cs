@@ -21,6 +21,7 @@ namespace Dietbox.ECommerce.WebAPI.Configurations.Services
 
             // Validators:
             services.AddScoped<CreateProductValidator>();
+            services.AddScoped<BuyProductValidator>();
 
         }
     }

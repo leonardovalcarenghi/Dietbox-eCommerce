@@ -25,5 +25,13 @@ namespace Dietbox.ECommerce.Core.Interfaces.Products
         /// <param name="command">Comando de exclusão do produto.</param>
         /// <returns></returns>
         Task Delete(DeleteProductCommand command);
+
+
+        /// <summary>
+        /// Comprar produto.
+        /// </summary>
+        /// <param name="command">Comando de compra do produto.</param>
+        /// <returns></returns>
+        Task Buy(BuyProductCommand command);
     }
 }

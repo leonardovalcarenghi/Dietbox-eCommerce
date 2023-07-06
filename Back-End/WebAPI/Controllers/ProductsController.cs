@@ -31,16 +31,16 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var cacheEntry = _cache.GetOrCreate("ProductsListCache",  entry =>
+            var cacheEntry = _cache.GetOrCreate("ProductsListCache", entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
                 entry.SetPriority(CacheItemPriority.High);
-                var result =  _queries.Get().GetAwaiter().GetResult();
+                var result = _queries.Get().GetAwaiter().GetResult();
                 return result;
             });
 
             return Ok(cacheEntry);
-        }     
+        }
 
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
         /// </summary>
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
-        {     
+        {
             var cacheEntry = _cache.GetOrCreate($"Product{id}Cache", entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
@@ -79,6 +79,7 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
             throw new NotImplementedException();
         }
 
+
         /// <summary>
         /// [ EndPoint ] Excluir produto.
         /// </summary>
@@ -86,6 +87,16 @@ namespace Dietbox.ECommerce.WebAPI.Controllers
         public Task<IActionResult> Delete([FromRoute] int id)
         {
             throw new NotImplementedException();
+        }
+
+
+        [HttpPost("{id:int}/buy")]
+        public async Task<IActionResult> Buy([FromRoute] int id, BuyProductCommand command)
+        {
+            command.ID = id;
+            await _handler.Buy(command);
+            _cache.Remove($"Product{id}Cache");
+            return Ok("Compra efetuada com êxito.");
         }
 
     }

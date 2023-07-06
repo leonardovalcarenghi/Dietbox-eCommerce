@@ -1,4 +1,5 @@
 ﻿using Dietbox.ECommerce.ORM.Entities.Companies;
+using Dietbox.ECommerce.ORM.Entities.Customers;
 using Dietbox.ECommerce.ORM.Entities.Products;
 using Dietbox.ECommerce.ORM.Entities.Users;
 using Dietbox.ECommerce.ORM.Interfaces;
@@ -27,6 +28,7 @@ namespace Dietbox.ECommerce.ORM.Contexts
             modelBuilder?.Entity<Company>();
             modelBuilder?.Entity<Customer>();
             modelBuilder?.Entity<Product>();
+            modelBuilder?.Entity<Order>();
         }
 
         protected void SetConfigurations(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ namespace Dietbox.ECommerce.ORM.Entities.Customers
 {
 
     [Table("Orders", Schema = "customer")]
-    public class Orders : IIdentity, ICreatedDate
+    public class Order : IIdentity, ICreatedDate
     {
 
         /// <summary>
