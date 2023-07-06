@@ -1,5 +1,6 @@
 ﻿using Dietbox.ECommerce.Core.Commands.Products;
 using Dietbox.ECommerce.Core.Interfaces;
+using Dietbox.ECommerce.Tenant;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +12,7 @@ namespace Dietbox.ECommerce.Core.Validations.Products
 {
     public class CreateProductValidator : IValidator<CreateProductCommand>
     {
-
+        private readonly ITenant _tenate;
         private readonly CultureInfo _cultureInfo;
         private readonly TextInfo _textInfo;
         private readonly List<string> _messages;
@@ -21,8 +22,9 @@ namespace Dietbox.ECommerce.Core.Validations.Products
         private const int _BRAND_MAX_LENGTH = 50;
         private const int _CODE_MAX_LENGTH = 50;
 
-        public CreateProductValidator()
+        public CreateProductValidator(ITenant tenate)
         {
+            _tenate = tenate;
             _cultureInfo = Thread.CurrentThread.CurrentCulture;
             _textInfo = _cultureInfo.TextInfo;
             _messages = new();
@@ -33,6 +35,8 @@ namespace Dietbox.ECommerce.Core.Validations.Products
             if (command is null)
                 return (false, new() { "Parâmetro inválido." });
 
+            if (_tenate.Type is not TenantType.Company)
+                return (false, new() { "Somente empresas podem cadastrar produtos." });
 
             #region Nome do Produto
 
@@ -85,8 +89,8 @@ namespace Dietbox.ECommerce.Core.Validations.Products
             #region Preço do Produto
 
             if (command.Price is < 0)
-                _messages.Add("O valor do produto não pode ser inferior à 0 (zero).");  
-            
+                _messages.Add("O valor do produto não pode ser inferior à 0 (zero).");
+
             if (command.Price is 0)
                 _messages.Add("O valor do produto não pode ser igual à 0 (zero).");
 
