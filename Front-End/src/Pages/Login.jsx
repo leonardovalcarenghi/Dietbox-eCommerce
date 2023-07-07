@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IsEmail } from "../Utils";
 import { Post } from "../Request";
 
-export default function LoginPage({ setIsAuth }) {
+export default function LoginPage({  }) {
 
     const [createAccountSuccess, setCreateAccountSuccess] = useState(!!(sessionStorage["createAccountSuccess"]));
     const [authorizationExpired, setAuthorizationExpired] = useState(!!(sessionStorage["authorizationExpired"]))
@@ -34,10 +34,11 @@ export default function LoginPage({ setIsAuth }) {
 
         try {
             const result = await Post(loginAs == 1 ? "/customers/login" : "/companies/login", { email, password });
-            const { token, expiration } = result;
+            const { token, expiration, name } = result;
             localStorage["authorization"] = token;
             localStorage["authorization_expiration"] = expiration;
             localStorage["loginAs"] = loginAs;
+            localStorage["entityName"] = name;
             window.location.href = "/"; // Ir para ínicio.
         }
         catch (error) {
