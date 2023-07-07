@@ -64,7 +64,7 @@ namespace Dietbox.ECommerce.Core.Handlers.Customers
                 .FirstOrDefaultAsync();
 
             (string token, DateTime? expiration) = _jsonWebToken.GenerateToken(entity);
-            AuthorizationDTO authorization = new(token, (DateTime)expiration, TenantType.Company);
+            AuthorizationDTO authorization = new(token, (DateTime)expiration, entity.Name, TenantType.Company);
             return authorization;
         }
     }
