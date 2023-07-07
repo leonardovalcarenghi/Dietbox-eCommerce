@@ -82,8 +82,8 @@ export default function NewProductPage(props) {
     }
 
     return (
-        <>
-            <div className="container">
+        <>       
+            <div className="container p-5">
                 <div className="row justify-content-center">
                     <div className="col-12 col-lg-6">
                         <div className="card">

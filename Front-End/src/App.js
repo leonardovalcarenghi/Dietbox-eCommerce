@@ -22,8 +22,12 @@ import Error404Page from "./Pages/Error404";
 import NewProductPage from "./Pages/NewProduct";
 
 export default function App() {
+
+  const [entityName, setEntityName] = useState(localStorage["entityName"]);
   const [isAuth, setIsAuth] = useState(!!localStorage["authorization"]);
   const [isCompany, setIsCompany] = useState(localStorage["loginAs"] == 2);
+
+
 
   const PrivateRoutes = createBrowserRouter([
     {
@@ -61,13 +65,13 @@ export default function App() {
     },
     {
       path: "login",
-      element: <LoginPage setIsAuth={setIsAuth} />,
+      element: <LoginPage setIsAuth={setIsAuth}  />,
     },
   ]);
 
   return (
     <>
-      {isAuth && <NavBar isCompany={isCompany} />}
+      {isAuth && <NavBar isCompany={isCompany} entityName={entityName} />}
 
       <div className="p-5">
         <RouterProvider router={isAuth ? PrivateRoutes : PublicRoutes} />
